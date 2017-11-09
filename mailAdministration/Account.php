@@ -90,7 +90,7 @@ and open the template in the editor.
                         <a href="Domains.php" >Domains</a>
                     </li>
                     <li>
-                        <a href="#aliases" >Aliases</a>
+                        <a href="Aliases.php" >Aliases</a>
                     </li>
                     <li>
                         <a href="#adminAccounts">Admin Accounts</a>

@@ -82,7 +82,7 @@ and open the template in the editor.
                         <a href="#domains" class="current">Domains</a>
                     </li>
                     <li>
-                        <a href="#aliases" >Aliases</a>
+                        <a href="Aliases.php" >Aliases</a>
                     </li>
                     <li>
                         <a href="#adminAccounts">Admin Accounts</a>

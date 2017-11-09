@@ -60,7 +60,7 @@ and open the template in the editor.
                         <a href="Domains.php" onclick="setNavClasses(2);">Domains</a>
                     </li>
                     <li>
-                        <a href="#aliases" onclick="setNavClasses(3);">Aliases</a>
+                        <a href="Aliases.php" onclick="setNavClasses(3);">Aliases</a>
                     </li>
                     <li>
                         <a href="#adminAccounts" onclick="setNavClasses(4);">Admin Accounts</a>
