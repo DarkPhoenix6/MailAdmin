@@ -415,5 +415,4 @@ class EmailData {
                         . '</tr>';
         }
     }
-
 }
