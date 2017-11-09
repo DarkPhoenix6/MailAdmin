@@ -8,6 +8,7 @@ table {
     border: 1px solid black;
     border-collapse: collapse;
     margin-left: 4px;
+    /*min-width: 40vh;*/
     max-width: 80vh;
     width: auto;
 }

@@ -27,7 +27,7 @@ thead tr th {
 
 table.scroll tbody {
     height: auto;
-    max-height: 75vh;
+    max-height: 70vh;
     overflow-y: auto;
     overflow-x: hidden;
 }
