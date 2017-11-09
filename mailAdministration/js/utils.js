@@ -20,11 +20,10 @@ function filterInt(value) {
     }
     return NaN;
 }
-function filterEmail(value){
-    if(/^([\w+-.%]+@[\w\-.]+\.[A-Za-z]{2,4},*[\W]*)+$/.test(value)){
+function filterEmail(value) {
+    if (/^([\w+-.%]+@[\w\-.]+\.[A-Za-z]{2,4},*[\W]*)+$/.test(value)) {
         return true;
-    }
-    else{
+    } else {
         return false;
     }
 }
@@ -67,7 +66,7 @@ function generateRandomNumber(digits) {// precision --> number precision in inte
     } else
         return "Number of digits should not exceed 20!";
 }
-function toggleClass(classToToggle, elementID){
+function toggleClass(classToToggle, elementID) {
     $(elementID).toggleClass(classToToggle);
 }
 
@@ -77,8 +76,12 @@ function submitSortForm(option, id) {
     getByID(id).submit();
 }
 
-function submitDelete(username, domain, formID){
+function submitDelete(username, domain, formID) {
     getByID('deleteUsername').value = username;
+    submitDomainDelete(domain, formID);
+}
+
+function submitDomainDelete(domain, formID) {
     getByID('deleteDomain').value = domain;
     getByID(formID).submit();
 }

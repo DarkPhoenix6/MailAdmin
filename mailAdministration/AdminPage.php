@@ -57,7 +57,7 @@ and open the template in the editor.
                         <a href="Account.php" onclick="setNavClasses(1);">Accounts</a>
                     </li>
                     <li>
-                        <a href="#domains" onclick="setNavClasses(2);">Domains</a>
+                        <a href="Domains.php" onclick="setNavClasses(2);">Domains</a>
                     </li>
                     <li>
                         <a href="#aliases" onclick="setNavClasses(3);">Aliases</a>

@@ -20,34 +20,27 @@ if ($_SESSION['emailDB']) {
     $mysqli = $_SESSION['emailDB'];
     $mysqli->connect();
 //    var_dump($_POST);
-    if (filter_input(INPUT_POST, 'sortType')) {
-        $sortType = test_input(filter_input(INPUT_POST, 'sortType'));
-        $mysqli->setSort($sortType);
-    }elseif (filter_input(INPUT_POST, 'user') && filter_input(INPUT_POST, 'domain') && filter_input(INPUT_POST, 'password') && filter_input(INPUT_POST, 'user') !== ' ' && filter_input(INPUT_POST, 'password') !== ' ') {
-        $user = mb_strtolower(strict_input_Filter(filter_input(INPUT_POST, 'user')));
+    if (filter_input(INPUT_POST, 'domain') && filter_input(INPUT_POST, 'domain') !== ' ' && checkDomain(filter_input(INPUT_POST, 'domain')) ) {
+    
         $domain = strict_input_Filter(filter_input(INPUT_POST, 'domain'));
-        $pass = strict_input_Filter(filter_input(INPUT_POST, 'password'));
+
 //        var_dump($user, $domain, $pass);
-        $isError = $mysqli->createUser($user, $pass, $domain);
+        $isError = $mysqli->createDomain($domain);
 //        var_dump($isError);
         if ($isError) {
             $displayBlock .= '<p class="error">Error Occured</p>';
-        }else{
-            $displayBlock .= '<p class="success">Successfully created account</p>';
+        } else {
+            $displayBlock .= '<p class="success">Successfully created domain</p>';
         }
-    }elseif (filter_input(INPUT_POST, 'user') === ' ' ) {
-        $displayBlock .= '<p class="error">Invalid Username</p>';
-    }elseif (filter_input(INPUT_POST, 'password') === ' ' ) {
-        $displayBlock .= '<p class="error">Invalid Password</p>';
-    }elseif (filter_input(INPUT_POST, 'deleteDomain') && filter_input(INPUT_POST, 'deleteUsername')){
-        $user = strict_input_Filter(filter_input(INPUT_POST, 'deleteUsername')) 
-                . '@' 
-                . strict_input_Filter(filter_input(INPUT_POST, 'deleteDomain'));
-        $isError = $mysqli->deleteUser($user);
+    } elseif (filter_input(INPUT_POST, 'domain') === ' ' || (filter_input(INPUT_POST, 'domain') && !checkDomain(filter_input(INPUT_POST, 'domain')))) {
+        $displayBlock .= '<p class="error">Invalid domain</p>';
+    } elseif (filter_input(INPUT_POST, 'deleteDomain') ) {
+        $domain = strict_input_Filter(filter_input(INPUT_POST, 'deleteDomain'));
+        $isError = $mysqli->deleteDomain($domain);
         if ($isError) {
             $displayBlock .= '<p class="error">Error Occured</p>';
-        }else{
-            $displayBlock .= '<p class="success">Successfully deleted account</p>';
+        } else {
+            $displayBlock .= '<p class="success">Successfully deleted domain</p>';
         }
     }
 //    var_dump($mysqli, $_POST);
@@ -56,8 +49,7 @@ if ($_SESSION['emailDB']) {
     $_SESSION['emailDB'] = $mysqli;
 //    var_dump($mysqli);
 }
-$myTable = $mysqli->displayAccounts();
-$myDomains = $mysqli->getDomainOptions();
+$myTable = $mysqli->displayDomains();
 $_SESSION['emailDB'] = $mysqli;
 ?>
 <!DOCTYPE html>
@@ -84,10 +76,10 @@ and open the template in the editor.
                     </li>
 
                     <li>
-                        <a href="#account" class="current" >Accounts</a>
+                        <a href="Account.php"  >Accounts</a>
                     </li>
                     <li>
-                        <a href="Domains.php" >Domains</a>
+                        <a href="#domains" class="current">Domains</a>
                     </li>
                     <li>
                         <a href="#aliases" >Aliases</a>
@@ -103,38 +95,28 @@ and open the template in the editor.
         </div>
         <main class="main">
             <?php echo $displayBlock; ?>
-            <form id="Accounts" method="post" 
+            <form id="Domains" method="post" 
                   action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <input id="sortType" type="hidden" name="sortType" value="" />
-                <input id="deleteUsername" type="hidden" name="deleteUsername" value="" />
                 <input id="deleteDomain" type="hidden" name="deleteDomain" value="" />
-                <div>
-                    email addresses
-                </div>
+                
                 <table class="scroll">
-                    
+
                     <?php
                     // put your code here
                     echo $myTable;
                     ?>
                 </table></form>
 
-            <form id="accountcreation" method="post" 
+            <form name="domainCreation" id="domainCreation" method="post" 
                   action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <fieldset>
-                    <legend> Account Creation </legend>
-                    <label for="user">Email:</label>
-                   
-                    <input type="hidden" name="createAccount" id="createAccount" value="1"/>
-                    <input name ="user" type="text" required="" autocomplete="off" /> @ 
-                    <select name="domain" required="">
-                        <?php
-                        echo $myDomains;
-                        ?>
-                    </select>
-                    <br>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required="" autocomplete="off" />
+                    <legend> Domain Creation </legend>
+                    <label for="domain">Domain:</label>
+
+                    <input type="hidden" name="createDomain" id="createAccount" value="1"/>
+                    <input id="domain" name ="domain" type="text" required="" autocomplete="off" />  
+
                 </fieldset>
                 <input type="submit" name="submit" value="Submit" />
             </form>
@@ -142,6 +124,6 @@ and open the template in the editor.
         <script src="js/require.js"></script>
         <script src="js/navbar.js"></script>
         <script src="js/utils.js"></script>
-        <script src="js/tableScrollbarAccount.js"></script>
+        <script src="js/tableScrollbar.js"></script>
     </body>
 </html>

@@ -98,6 +98,19 @@ class EmailData {
         return $this->queryDB($result, $password_query);
     }
 
+    public function createDomain($domain) {
+        $sql = "INSERT INTO `virtual_domains` (`id`, `name`) VALUES (NULL, '"
+                . $domain . "')";
+        $this->_domainSubMethod($isError, $sql);
+        return $isError;
+    }
+
+    public function deleteDomain($domain) {
+        $sql = "DELETE FROM `virtual_domains` WHERE `name`='" . $domain . "'";
+        $this->_domainSubMethod($isError, $sql);
+        return $isError;
+    }
+
     public function createUser($userName, $pass, $domain) {
         $email = $userName . '@' . $domain;
         $reEmail = $this->realEscape($email);
@@ -217,6 +230,31 @@ class EmailData {
         return $myTable;
     }
 
+    public function displayDomains() {
+        $isError = FALSE;
+        $numRows = 0;
+        $queryArray;
+        $myTable = ''
+                . '<thead><tr><th></th><th >Domains</th>'
+                . '</tr>'
+                . '</thead><tbody>';
+            $isError = FALSE;
+        $myOptions = '';
+        $result = FALSE;
+        $queryArray;
+        if (FALSE !== ($isError = $this->getDomains($result))) {
+            ;
+        } elseif (FALSE !== ($isError = $this->_database->getCount($result, $numRows))) {
+            ;
+        } elseif ($numRows == 0) {
+            $myTable .= '<tr><td colspan="2">No Domains Created yet.</td></tr>';
+        } else {
+            $this->_displayDomains($myTable, $result, $isError, $queryArray);
+        }
+       $myTable .= '</tbody>';
+        return $myTable;
+    }
+
     public function getDomainID($domain, &$id) {
         $SqlQuery = "SELECT id FROM `virtual_domains` WHERE `name`='" . $domain . "'";
         $result;
@@ -288,6 +326,21 @@ class EmailData {
         return $isError;
     }
 
+    // PROTECTED METHODS
+    protected function _domainSubMethod(&$isError, $query) {
+        if (FALSE == ($this->_database->startTransaction())) {
+            if (FALSE == ($isError = $this->_database->state($query))) {
+                $Error = $this->_database->commitTransaction();
+            }
+        } else {
+            //Something Bad happened
+            $isError = TRUE;
+            $Error = $this->_database->cancelTransaction();
+        }
+//        var_dump($this->_database, $sql_VirtualAlias, $sql_VirtualUser);
+        $Error = $this->_database->verifyTransactions();
+    }
+
     // PRIVATE METHODS
 
     private function _displayAccounts(&$myTable, &$isError, &$queryArray) {
@@ -307,7 +360,7 @@ class EmailData {
             if ($isAccount) {
                 $myTable .= '<tr>'
                         . '<td class=""><span onclick="'
-                        . 'submitDelete(\''. $SU . '\', \'' . $SD .'\', \'Accounts\')">'
+                        . 'submitDelete(\'' . $SU . '\', \'' . $SD . '\', \'Accounts\')">'
                         . ' &#xd7;&nbsp;Delete</span></td>'
                         . '<td class="' . $UserAcctClass . '">' . $SU . '</td>'
                         . '<td class="' . $SD_class . '">@' . $SD . '</td>'
@@ -350,6 +403,16 @@ class EmailData {
     private function _domainOptions(&$myOptions, $result, &$isError, &$queryArray) {
         while (FALSE === ($isError = $this->_database->fetchArray($result, $queryArray)) && $queryArray != NULL) {
             $myOptions .= '<option value="' . $queryArray["name"] . '">' . $queryArray['name'] . '</option>';
+        }
+    }
+    private function _displayDomains(&$myTable, $result, &$isError, &$queryArray) {
+        while (FALSE === ($isError = $this->_database->fetchArray($result, $queryArray)) && $queryArray != NULL) {
+            $myTable .= '<tr>'
+                        . '<td class=""><span onclick="'
+                        . 'submitDomainDelete(\''. $queryArray["name"] . '\', \'Domains\')">'
+                        . ' &#xd7;&nbsp;Delete</span></td>'
+                        . '<td class="">' . $queryArray["name"] . '</td>'
+                        . '</tr>';
         }
     }
 

@@ -25,6 +25,11 @@ function filterEmail($email) {
 function checkSpaces($data) {
     return ( 1 == preg_match('/\s/', $data));
 }
-function checkUserPattern($data){
-    return ( 1 == preg_match('/[\w+-.%]/', $data));
+
+function checkUserPattern($data) {
+    return ( 1 == preg_match('/^([\w+-.%])/', $data));
+}
+
+function checkDomain($data) {
+    return ( 1 == preg_match('/^([\w\-.]+\.[A-Za-z]{2,4})/', $data) );
 }
