@@ -1,0 +1,137 @@
+@import "normalize.css";
+@import "mobile_menu.css";
+@import "tables.css";
+body {
+    background-color: skyblue;
+}
+table {
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-left: 4px;
+}
+thead {
+    background-color: #800000;
+    color: #FFFFFF;
+    /*position:fixed;*/
+}
+th, td {
+    border: 1px solid black;
+    padding: 0.5em 1em;
+}
+tr, th, td, tbody, thead, tfoot, table {
+    font-family: "Times New Roman", Times, serif;
+}
+tbody tr:nth-child(even) {
+    background-color: #cccccc;
+}
+.main {
+    /*margin-top: 52px;*/
+}
+figure {
+    float: left;
+    margin: 1em 0 1em 0;
+    max-width:25%
+}
+figure a img {
+    /*max-width: 100%;*/
+}
+figcaption {
+    display: block;
+    font-size: 80%;
+    padding-top: 0.25em;
+    margin-bottom: 1em;
+    text-align: center;
+    /*border-bottom: 1px solid gray;*/
+}
+div.left {
+    float: left;
+    width: 55%;
+}
+div.right {
+    float: right;
+    width: 45%;
+}
+a:hover {
+    color: red;
+}
+img.tux, img.mysql_database, img.php_logo, img.drupal_logo{
+    max-width: 100%;
+    max-height: 25%;
+    vertical-align: middle;
+}
+img.tux:before{
+    clear: both;
+}
+img.tux, img.mysql_database, img.php_logo {
+    float: left;
+    /*position: relative;*/
+}
+img.php_logo {
+    vertical-align: middle;
+}
+img.drupal_logo {
+    /*float: right;*/
+}
+#section1, #section2 {
+    float: left;
+    max-width: 60%;
+    border-bottom: 1px solid black;
+}
+aside {
+    float:right;
+    max-width: calc(40% - 1px);
+    border-left: 1px solid black;
+
+}
+.clear_before:before {
+    clear: both;
+}
+
+.center {
+    text-align:center;
+
+}
+.add_margin{
+    margin-left: 25%;
+
+}
+div.add_margin > a {
+    margin-left: 25%;
+}
+#Overview, #account, #domains, #aliases{
+
+}
+.displayBlock{
+    display: block;
+}
+
+@media only screen and (max-width: 599px) {/* styles for phone*/ 
+    aside, #section1, #section2{
+        width: 100%;
+        border: none;
+    }
+    aside {
+        max-width: 40%;
+    }
+    img.tux, img.mysql_database, img.php_logo, img.drupal_logo{
+        max-width: 100%;
+        max-height: 25%;
+        vertical-align: middle;
+    }
+}
+@media only screen and (min-width: 520px)
+{}
+@media only screen and (max-width: 575px) {
+    table {
+        /*display: none;*/
+    }
+}
+@media only screen and (min-width: 600px) { /* styles for tablet portrait*/ }
+@media only screen and (min-width: 900px) { /* styles for tablet landscape*/ }
+@media only screen and (min-width: 1200px) { /* styles for desktop*/
+    table {
+        min-width: 50%;
+    }	
+}
+@media only screen and (min-width: 1800px) { /* styles for big desktop*/}
+

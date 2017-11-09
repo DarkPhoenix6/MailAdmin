@@ -1,0 +1,41 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 6-Nov-2017, 5:49:58 PM
+    Author     : cfedun
+*/
+
+
+table {
+	border: 1px solid black;
+	border-collapse: collapse;
+	margin-left: 4px;
+}
+thead {
+	background-color: #800000;
+	color: #FFFFFF;
+}
+th, td {
+	border: 1px solid black;
+	padding: 0.5em 1em;
+}
+tr, th, td, tbody, thead, tfoot, table {
+	font-family: "Times New Roman", Times, serif;
+}
+tbody tr:nth-child(even) {
+	background-color: #cccccc;
+}
+/*tbody, tr, thead{
+    display: block;
+}
+tbody{
+    height: auto;
+    min-height: 20vh;
+    max-height: 80vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+}*/
