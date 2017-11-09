@@ -20,8 +20,8 @@ if ($_SESSION['emailDB']) {
     $mysqli = $_SESSION['emailDB'];
     $mysqli->connect();
 //    var_dump($_POST);
-    if (filter_input(INPUT_POST, 'domain') && filter_input(INPUT_POST, 'domain') !== ' ' && checkDomain(filter_input(INPUT_POST, 'domain')) ) {
-    
+    if (filter_input(INPUT_POST, 'domain') && filter_input(INPUT_POST, 'domain') !== ' ' && checkDomain(filter_input(INPUT_POST, 'domain'))) {
+
         $domain = strict_input_Filter(filter_input(INPUT_POST, 'domain'));
 
 //        var_dump($user, $domain, $pass);
@@ -34,7 +34,7 @@ if ($_SESSION['emailDB']) {
         }
     } elseif (filter_input(INPUT_POST, 'domain') === ' ' || (filter_input(INPUT_POST, 'domain') && !checkDomain(filter_input(INPUT_POST, 'domain')))) {
         $displayBlock .= '<p class="error">Invalid domain</p>';
-    } elseif (filter_input(INPUT_POST, 'deleteDomain') ) {
+    } elseif (filter_input(INPUT_POST, 'deleteDomain')) {
         $domain = strict_input_Filter(filter_input(INPUT_POST, 'deleteDomain'));
         $isError = $mysqli->deleteDomain($domain);
         if ($isError) {
@@ -99,7 +99,7 @@ and open the template in the editor.
                   action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <input id="sortType" type="hidden" name="sortType" value="" />
                 <input id="deleteDomain" type="hidden" name="deleteDomain" value="" />
-                
+
                 <table class="scroll">
 
                     <?php

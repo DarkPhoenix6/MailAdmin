@@ -10,23 +10,23 @@ and open the template in the editor.
 
 
 table {
-	border: 1px solid black;
-	border-collapse: collapse;
-	margin-left: 4px;
+    border: 1px solid black;
+    border-collapse: collapse;
+    margin-left: 4px;
 }
 thead {
-	background-color: #800000;
-	color: #FFFFFF;
+    background-color: #800000;
+    color: #FFFFFF;
 }
 th, td {
-	border: 1px solid black;
-	padding: 0.5em 1em;
+    border: 1px solid black;
+    padding: 0.5em 1em;
 }
 tr, th, td, tbody, thead, tfoot, table {
-	font-family: "Times New Roman", Times, serif;
+    font-family: "Times New Roman", Times, serif;
 }
 tbody tr:nth-child(even) {
-	background-color: #cccccc;
+    background-color: #cccccc;
 }
 /*tbody, tr, thead{
     display: block;

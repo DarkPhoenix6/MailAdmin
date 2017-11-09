@@ -243,7 +243,7 @@ class Database {
             }
         }
     }
-    
+
     /**
      * 
      * @param boolean $isError
