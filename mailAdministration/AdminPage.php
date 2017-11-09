@@ -42,7 +42,7 @@ and open the template in the editor.
         <meta charset="UTF-8">
         <title>Admin Page</title>
         <link rel="stylesheet" href="css/index.css" />
-
+        <link rel="stylesheet" href="css/scrollingTable.css" />
     </head>
     <body>
         <div class="parent clear">
@@ -84,11 +84,11 @@ and open the template in the editor.
                             Alias Account
                         </div>
                     </div>
-                    <table>
-                    <?php
+                    <table class="scroll">
+                        <?php
 // put your code here
-                    echo "$myTable";
-                    ?>
+                        echo "$myTable";
+                        ?>
                     </table>
                 </form>
                 <form id="account">
@@ -103,7 +103,9 @@ and open the template in the editor.
             </div>
             <script src="js/require.js"></script>
             <script src="js/navbar.js"></script>
-            <script src="js/sortTable.js"></script>
+<!--            <script src="js/sortTable.js"></script>-->
+            <script src="js/utils.js"></script>
+            <script src="js/tableScrollbar.js"></script>
         </main>
     </body>
 </html>
