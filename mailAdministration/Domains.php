@@ -11,9 +11,11 @@ if (!$_SESSION['auth']) {
 }
 if ($_SESSION['last_activity'] < time() - $_SESSION['expire_time']) { //have we expired?
     //redirect to logout.php
+    $_SESSION['destroy'] = FALSE;
     $_SESSION['prevPage'] = htmlspecialchars($_SERVER["PHP_SELF"]);
     header('Location: logout.php');
 } else { //if we haven't expired:
+    $_SESSION['destroy'] = TRUE; // Since we want to destroy the session if clicking logout
     $_SESSION['last_activity'] = time(); //this was the moment of last activity.
 }
 if ($_SESSION['emailDB']) {

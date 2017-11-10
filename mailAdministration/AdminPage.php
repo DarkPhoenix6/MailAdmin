@@ -5,14 +5,17 @@ session_start();
 if (!$_SESSION['auth']) {
     //redirect back to login form if not authorized
     $_SESSION['prevPage'] = htmlspecialchars($_SERVER["PHP_SELF"]);
+
     header("Location: login.php");
     exit;
 }
 if ($_SESSION['last_activity'] < time() - $_SESSION['expire_time']) { //have we expired?
     //redirect to logout.php
+    $_SESSION['destroy'] = FALSE;
     $_SESSION['prevPage'] = htmlspecialchars($_SERVER["PHP_SELF"]);
     header('Location: logout.php');
 } else { //if we haven't expired:
+    $_SESSION['destroy'] = TRUE; // Since we want to destroy the session if clicking logout
     $_SESSION['last_activity'] = time(); //this was the moment of last activity.
 }
 if ($_SESSION['emailDB']) {
@@ -105,7 +108,7 @@ and open the template in the editor.
             <script src="js/navbar.js"></script>
 <!--            <script src="js/sortTable.js"></script>-->
             <script src="js/utils.js"></script>
-            <script src="js/tableScrollbar.js"></script>
+            <script src="js/tableScrollbarOverview.js"></script>
         </main>
     </body>
 </html>

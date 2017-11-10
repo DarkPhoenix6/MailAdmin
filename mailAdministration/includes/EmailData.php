@@ -238,7 +238,7 @@ class EmailData {
                 . '<thead><tr><th></th><th >Domains</th>'
                 . '</tr>'
                 . '</thead><tbody>';
-            $isError = FALSE;
+        $isError = FALSE;
         $myOptions = '';
         $result = FALSE;
         $queryArray;
@@ -251,7 +251,7 @@ class EmailData {
         } else {
             $this->_displayDomains($myTable, $result, $isError, $queryArray);
         }
-       $myTable .= '</tbody>';
+        $myTable .= '</tbody>';
         return $myTable;
     }
 
@@ -347,7 +347,8 @@ class EmailData {
     private function _displayAccounts(&$myTable, &$isError, &$queryArray) {
         $SD_class = 'td_alignLeft';
         $UserAcctClass = 'td_alignRight';
-        $accountColspan = 3;$class = "delete";
+        $accountColspan = 3;
+        $class = "delete";
         while (FALSE === ($isError = $this->_database->fetchArray($this->_emailQueryResult, $queryArray)) && $queryArray != NULL) {
 //                if (!$isError) {
 //                    var_dump($this->_emailQueryResult, $queryArray);
@@ -360,7 +361,7 @@ class EmailData {
 
             if ($isAccount) {
                 $myTable .= '<tr>'
-                        . '<td class=""><span class="' . $class .'" onclick="'
+                        . '<td class=""><span class="' . $class . '" onclick="'
                         . 'submitDelete(\'' . $SU . '\', \'' . $SD . '\', \'Accounts\')">'
                         . ' &#xd7;&nbsp;Delete</span></td>'
                         . '<td class="' . $UserAcctClass . '">' . $SU . '</td>'
@@ -375,7 +376,9 @@ class EmailData {
     private function _displayEmail(&$myTable, &$isError, &$queryArray) {
         $SD_class = 'td_alignLeft';
         $UserAcctClass = 'td_alignRight';
+        $account = 'accountRow';
         $accountColspan = 3;
+        $alias = 'aliasRow';
         while (FALSE === ($isError = $this->_database->fetchArray($this->_emailQueryResult, $queryArray)) && $queryArray != NULL) {
 //                if (!$isError) {
 //                    var_dump($this->_emailQueryResult, $queryArray);
@@ -386,14 +389,18 @@ class EmailData {
             $SD = $queryArray[$this->_SD];
             $isAccount = (NULL == $DU);
 
-            $myTable .= '<tr>'
-                    . '<td class="' . $UserAcctClass . '">' . $SU . '</td>'
+            
+            $currentRow = '<td class="' . $UserAcctClass . '">' . $SU . '</td>'
                     . '<td class="' . $SD_class . '">@' . $SD . '</td>';
             if ($isAccount) {
-                $myTable .= '<td colspan="' . $accountColspan . '">'
+                $myTable .= '<tr class="' . $account . '">'
+                        . $currentRow
+                        . '<td colspan="' . $accountColspan . '">'
                         . 'Is an account.</td>';
             } else {
-                $myTable .= '<td >Is an Alias of:</td>'
+                $myTable .= '<tr class="' . $alias . '">'
+                        . $currentRow
+                        . '<td >Is an Alias of:</td>'
                         . '<td class="' . $UserAcctClass . '">' . $DU . '</td>'
                         . '<td class="' . $SD_class . '">@' . $DD . '</td>';
             }
@@ -406,15 +413,17 @@ class EmailData {
             $myOptions .= '<option value="' . $queryArray["name"] . '">' . $queryArray['name'] . '</option>';
         }
     }
+
     private function _displayDomains(&$myTable, $result, &$isError, &$queryArray) {
         $class = "delete";
         while (FALSE === ($isError = $this->_database->fetchArray($result, $queryArray)) && $queryArray != NULL) {
             $myTable .= '<tr>'
-                        . '<td class=""><span class="' . $class .'" onclick="'
-                        . 'submitDomainDelete(\''. $queryArray["name"] . '\', \'Domains\')">'
-                        . ' &#xd7;&nbsp;Delete</span></td>'
-                        . '<td class="">' . $queryArray["name"] . '</td>'
-                        . '</tr>';
+                    . '<td class=""><span class="' . $class . '" onclick="'
+                    . 'submitDomainDelete(\'' . $queryArray["name"] . '\', \'Domains\')">'
+                    . ' &#xd7;&nbsp;Delete</span></td>'
+                    . '<td class="">' . $queryArray["name"] . '</td>'
+                    . '</tr>';
         }
     }
+
 }
