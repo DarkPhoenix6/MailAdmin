@@ -5,14 +5,15 @@ session_start();
 if (!$_SESSION['auth']) {
     //redirect back to login form if not authorized
     $_SESSION['prevPage'] = htmlspecialchars($_SERVER["PHP_SELF"]);
-
     header("Location: login.php");
     exit;
 }
 if ($_SESSION['last_activity'] < time() - $_SESSION['expire_time']) { //have we expired?
-    //redirect to logout.php
+    // we don't want to destroy this session.... Yet...
     $_SESSION['destroy'] = FALSE;
+    // Set to return to this page
     $_SESSION['prevPage'] = htmlspecialchars($_SERVER["PHP_SELF"]);
+    //redirect to logout.php
     header('Location: logout.php');
 } else { //if we haven't expired:
     $_SESSION['destroy'] = TRUE; // Since we want to destroy the session if clicking logout
@@ -57,19 +58,19 @@ and open the template in the editor.
                     </li>
 
                     <li>
-                        <a href="Account.php" onclick="setNavClasses(1);">Accounts</a>
+                        <a href="Account.php" >Accounts</a>
                     </li>
                     <li>
-                        <a href="Domains.php" onclick="setNavClasses(2);">Domains</a>
+                        <a href="Domains.php" >Domains</a>
                     </li>
                     <li>
-                        <a href="Aliases.php" onclick="setNavClasses(3);">Aliases</a>
+                        <a href="Aliases.php" >Aliases</a>
                     </li>
                     <li>
                         <a href="#adminAccounts" onclick="setNavClasses(4);">Admin Accounts</a>
                     </li>
                     <li>
-                        <a href="logout.php" onclick="setNavClasses(4);">Logout</a>
+                        <a href="logout.php" >Logout</a>
                     </li>
                 </ul>
             </nav>
@@ -81,10 +82,7 @@ and open the template in the editor.
                     <input id="sortType"type="hidden" name="sortType" value="SOURCEUSER" />
 
                     <table class="scroll">
-                        <?php
-// put your code here
-                        echo "$myTable";
-                        ?>
+                        <?php echo "$myTable"; ?>
                     </table>
                 </form>
                 <form id="account">

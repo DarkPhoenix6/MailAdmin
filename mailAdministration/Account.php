@@ -25,7 +25,7 @@ if ($_SESSION['emailDB']) {
     if (filter_input(INPUT_POST, 'sortType')) {
         $sortType = test_input(filter_input(INPUT_POST, 'sortType'));
         $mysqli->setSort($sortType);
-    }elseif (filter_input(INPUT_POST, 'user') && filter_input(INPUT_POST, 'domain') && filter_input(INPUT_POST, 'password') && filter_input(INPUT_POST, 'user') !== ' ' && filter_input(INPUT_POST, 'password') !== ' ') {
+    } elseif (filter_input(INPUT_POST, 'user') && filter_input(INPUT_POST, 'domain') && filter_input(INPUT_POST, 'password') && filter_input(INPUT_POST, 'user') !== ' ' && filter_input(INPUT_POST, 'password') !== ' ') {
         $user = mb_strtolower(strict_input_Filter(filter_input(INPUT_POST, 'user')));
         $domain = strict_input_Filter(filter_input(INPUT_POST, 'domain'));
         $pass = strict_input_Filter(filter_input(INPUT_POST, 'password'));
@@ -34,21 +34,21 @@ if ($_SESSION['emailDB']) {
 //        var_dump($isError);
         if ($isError) {
             $displayBlock .= '<p class="error">Error Occured</p>';
-        }else{
+        } else {
             $displayBlock .= '<p class="success">Successfully created account</p>';
         }
-    }elseif (filter_input(INPUT_POST, 'user') === ' ' ) {
+    } elseif (filter_input(INPUT_POST, 'user') === ' ') {
         $displayBlock .= '<p class="error">Invalid Username</p>';
-    }elseif (filter_input(INPUT_POST, 'password') === ' ' ) {
+    } elseif (filter_input(INPUT_POST, 'password') === ' ') {
         $displayBlock .= '<p class="error">Invalid Password</p>';
-    }elseif (filter_input(INPUT_POST, 'deleteDomain') && filter_input(INPUT_POST, 'deleteUsername')){
-        $user = strict_input_Filter(filter_input(INPUT_POST, 'deleteUsername')) 
-                . '@' 
+    } elseif (filter_input(INPUT_POST, 'deleteDomain') && filter_input(INPUT_POST, 'deleteUsername')) {
+        $user = strict_input_Filter(filter_input(INPUT_POST, 'deleteUsername'))
+                . '@'
                 . strict_input_Filter(filter_input(INPUT_POST, 'deleteDomain'));
         $isError = $mysqli->deleteUser($user);
         if ($isError) {
             $displayBlock .= '<p class="error">Error Occured</p>';
-        }else{
+        } else {
             $displayBlock .= '<p class="success">Successfully deleted account</p>';
         }
     }
@@ -114,7 +114,7 @@ and open the template in the editor.
                     email addresses
                 </div>
                 <table class="scroll">
-                    
+
                     <?php
                     // put your code here
                     echo $myTable;
@@ -126,7 +126,7 @@ and open the template in the editor.
                 <fieldset>
                     <legend> Account Creation </legend>
                     <label for="user">Email:</label>
-                   
+
                     <input type="hidden" name="createAccount" id="createAccount" value="1"/>
                     <input name ="user" type="text" required="" autocomplete="off" /> @ 
                     <select name="domain" required="">
