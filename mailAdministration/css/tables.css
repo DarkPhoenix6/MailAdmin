@@ -7,7 +7,7 @@ and open the template in the editor.
     Created on : 6-Nov-2017, 5:49:58 PM
     Author     : cfedun
 */
-
+@import 'all.css';
 
 table {
     border: 1px solid black;

@@ -266,7 +266,8 @@ class EmailData {
 
     Public function getDomains(&$result) {
         $isError = FALSE;
-        $domainQuery = "SELECT name, id FROM `virtual_domains`";
+        $domainQuery = "SELECT name, id FROM `virtual_domains` ORDER BY name"
+                . " ASC";
         return $this->queryDB($result, $domainQuery);
     }
 
@@ -346,7 +347,7 @@ class EmailData {
     private function _displayAccounts(&$myTable, &$isError, &$queryArray) {
         $SD_class = 'td_alignLeft';
         $UserAcctClass = 'td_alignRight';
-        $accountColspan = 3;
+        $accountColspan = 3;$class = "delete";
         while (FALSE === ($isError = $this->_database->fetchArray($this->_emailQueryResult, $queryArray)) && $queryArray != NULL) {
 //                if (!$isError) {
 //                    var_dump($this->_emailQueryResult, $queryArray);
@@ -359,7 +360,7 @@ class EmailData {
 
             if ($isAccount) {
                 $myTable .= '<tr>'
-                        . '<td class=""><span onclick="'
+                        . '<td class=""><span class="' . $class .'" onclick="'
                         . 'submitDelete(\'' . $SU . '\', \'' . $SD . '\', \'Accounts\')">'
                         . ' &#xd7;&nbsp;Delete</span></td>'
                         . '<td class="' . $UserAcctClass . '">' . $SU . '</td>'
@@ -406,9 +407,10 @@ class EmailData {
         }
     }
     private function _displayDomains(&$myTable, $result, &$isError, &$queryArray) {
+        $class = "delete";
         while (FALSE === ($isError = $this->_database->fetchArray($result, $queryArray)) && $queryArray != NULL) {
             $myTable .= '<tr>'
-                        . '<td class=""><span onclick="'
+                        . '<td class=""><span class="' . $class .'" onclick="'
                         . 'submitDomainDelete(\''. $queryArray["name"] . '\', \'Domains\')">'
                         . ' &#xd7;&nbsp;Delete</span></td>'
                         . '<td class="">' . $queryArray["name"] . '</td>'
