@@ -2,16 +2,16 @@
 @import "slicknav.css";
 
 #mobile_menu {
-	display: none;
+    display: none;
 }
 #navbar {
-	display: block;
+    display: block;
 }
 @media screen and (max-width: 520px) {
-	#mobile_menu {
-		display: block;
-	}
-	#navbar{
-		display: none;
-	}
+    #mobile_menu {
+        display: block;
+    }
+    #navbar{
+        display: none;
+    }
 }

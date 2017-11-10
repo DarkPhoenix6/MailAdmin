@@ -389,7 +389,7 @@ class EmailData {
             $SD = $queryArray[$this->_SD];
             $isAccount = (NULL == $DU);
 
-            
+
             $currentRow = '<td class="' . $UserAcctClass . '">' . $SU . '</td>'
                     . '<td class="' . $SD_class . '">@' . $SD . '</td>';
             if ($isAccount) {

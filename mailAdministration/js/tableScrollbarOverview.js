@@ -8,22 +8,22 @@
 
 
 // Change the selector if needed
-ready(function(){
-var $table = $('table.scroll'),
-    $bodyCells = $table.find('tbody tr.aliasRow:first').children(),
-    colWidth;
-    
+ready(function () {
+    var $table = $('table.scroll'),
+            $bodyCells = $table.find('tbody tr.aliasRow:first').children(),
+            colWidth;
+
 
 // Adjust the width of thead cells when window resizes
-$(window).resize(function() {
-    // Get the tbody columns width array
-    colWidth = $bodyCells.map(function() {
-        return $(this).width();
-    }).get();
-    
-    // Set the width of thead columns
-    $table.find('thead tr:last').children().each(function(i, v) {
-        $(v).width(colWidth[i]);
-    });    
-}).resize(); // Trigger resize handler
+    $(window).resize(function () {
+        // Get the tbody columns width array
+        colWidth = $bodyCells.map(function () {
+            return $(this).width();
+        }).get();
+
+        // Set the width of thead columns
+        $table.find('thead tr:last').children().each(function (i, v) {
+            $(v).width(colWidth[i]);
+        });
+    }).resize(); // Trigger resize handler
 });

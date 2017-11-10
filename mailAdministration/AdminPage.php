@@ -79,14 +79,7 @@ and open the template in the editor.
                 <form id="Overview" class="current" name="Overview" method="post" 
                       action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                     <input id="sortType"type="hidden" name="sortType" value="SOURCEUSER" />
-                    <div>
-                        <div>
-                            Email Addresses
-                        </div>
-                        <div>
-                            Alias Account
-                        </div>
-                    </div>
+
                     <table class="scroll">
                         <?php
 // put your code here
@@ -106,7 +99,6 @@ and open the template in the editor.
             </div>
             <script src="js/require.js"></script>
             <script src="js/navbar.js"></script>
-<!--            <script src="js/sortTable.js"></script>-->
             <script src="js/utils.js"></script>
             <script src="js/tableScrollbarOverview.js"></script>
         </main>

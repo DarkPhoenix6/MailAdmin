@@ -1,8 +1,9 @@
 <?php
+
 session_start();
 
-$_SESSION['auth']= FALSE;
-if ($_SESSION["destroy"]){
+$_SESSION['auth'] = FALSE;
+if ($_SESSION["destroy"]) {
     session_destroy();
 }
 header("Location: AdminPage.php");

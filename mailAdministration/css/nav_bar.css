@@ -1,55 +1,55 @@
 #navbar {
-	position: relative;
-	top: 0;
-	
+    position: relative;
+    top: 0;
+
 }
 #navbar ul {
-	list-style-type: none;
-	margin: 0;
-	padding: 0;
-	border-bottom: 1px solid black;
-	background-color: silver;
-	overflow: hidden;
-	border-radius: 0 0 0.3em 0.3em;
-	
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    border-bottom: 1px solid black;
+    background-color: silver;
+    overflow: hidden;
+    border-radius: 0 0 0.3em 0.3em;
+
 }
 #navbar ul li {
-	/*width: 33.333%;*/
-        width: 16.666%;
-	float: left;
+    /*width: 33.333%;*/
+    width: 16.666%;
+    float: left;
 }
 #navbar ul li a {
-	text-align: center;
-	display: block;
-	padding: 1em 0;
-	text-decoration: none;
-	font-weight: bold;
-	color: blue;
-	background-color: silver;
-	border-right: 1px solid black;
+    text-align: center;
+    display: block;
+    padding: 1em 0;
+    text-decoration: none;
+    font-weight: bold;
+    color: blue;
+    background-color: silver;
+    border-right: 1px solid black;
 }
 #navbar ul li a:hover {
-	background-color: silver;
+    background-color: silver;
 }
 #navbar ul li a.current {
-	background-color: rgb(200,255,220);
+    background-color: rgb(200,255,220);
 }
 #navbar ul li a:first-of-type {
-	border-left: 1px solid black;
+    border-left: 1px solid black;
 }
 
 .parent {
-	border: none;
-	padding: 0;
-	margin: 0;
-	/*width: calc(100vw - 2px);*/
+    border: none;
+    padding: 0;
+    margin: 0;
+    /*width: calc(100vw - 2px);*/
 }
 .child {
-	clear:both;
+    clear:both;
 }
 .main {
-	margin-top: 0;
-	padding-top: 0;
+    margin-top: 0;
+    padding-top: 0;
 }
 .clear:after {
     clear: both;
