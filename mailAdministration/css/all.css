@@ -8,6 +8,10 @@ and open the template in the editor.
     Author     : cfedun
 */
 
+body {
+    background-color: skyblue;
+}
+
 .delete {
     font-style: oblique;
     font-weight: bold;
@@ -18,5 +22,13 @@ and open the template in the editor.
     color: blue;
     text-decoration: underline;
 }
+.td_alignLeft {
+    text-align: left;
+}
+.td_alignRight {
+    text-align: right;
+}
 
-
+.center {
+    text-align: center;
+}

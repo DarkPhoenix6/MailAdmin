@@ -192,6 +192,45 @@ class EmailData {
         }
         return $myTable;
     }
+    
+    public function displayAliases() {
+        $isError = FALSE;
+        $numRows = 0;
+        $queryArray;
+        $myTable = ''
+                . '<thead><tr><th colspan="2">Email Address</th><th></th>'
+                . '<th colspan="2">Alias Account</th></tr>'
+                . '<tr><th onclick="submitSortForm(\'SOURCEUSER\', \'Aliases\')'
+                . '">User</th><th onclick="submitSortForm(\'SOURCEDOMAIN\', '
+                . '\'Aliases\')">Domain</th><th></th><th onclick="'
+                . 'submitSortForm(\'DESTUSER\', \'Aliases\')">User</th>'
+                . '<th onclick="submitSortForm(\'DESTDOMAIN\', \'Aliases\')">'
+                . 'Domain</th></tr></thead><tbody>';
+        if (FALSE !== ($isError = $this->getEmailOverview())) {
+            ;
+        } elseif (FALSE !== ($isError = $this->_database->getCount($this->_emailQueryResult, $numRows))) {
+            ;
+        } elseif ($numRows == 0) {
+            $myTable .= '<tr class="" colspan="6">'
+                    . '<td class="">No emails created yet. :)</td>'
+                    . '</tr>';
+        } else {
+            $this->_displayAliases($myTable, $isError, $queryArray);
+        }
+        $myTable .= '</tbody>';
+
+//        } elseif () {
+//            ;
+//        }
+
+        if (!$isError) {
+            //echo("<table>".$myTable."</table>");
+            //var_dump($this->_emailQueryResult, $queryArray);
+        } else {
+            printf("error occured!");
+        }
+        return $myTable;
+    }
 
     public function displayAccounts() {
         $isError = FALSE;
@@ -395,8 +434,40 @@ class EmailData {
             if ($isAccount) {
                 $myTable .= '<tr class="' . $account . '">'
                         . $currentRow
-                        . '<td colspan="' . $accountColspan . '">'
+                        . '<td class="center" colspan="' . $accountColspan . '">'
                         . 'Is an account.</td>';
+            } else {
+                $myTable .= '<tr class="' . $alias . '">'
+                        . $currentRow
+                        . '<td >Is an Alias of:</td>'
+                        . '<td class="' . $UserAcctClass . '">' . $DU . '</td>'
+                        . '<td class="' . $SD_class . '">@' . $DD . '</td>';
+            }
+            $myTable .= '</tr>';
+        }
+    }
+    
+    
+        private function _displayAliases(&$myTable, &$isError, &$queryArray) {
+        $SD_class = 'td_alignLeft';
+        $UserAcctClass = 'td_alignRight';
+        $accountColspan = 3;
+        $alias = 'aliasRow';
+        while (FALSE === ($isError = $this->_database->fetchArray($this->_emailQueryResult, $queryArray)) && $queryArray != NULL) {
+//                if (!$isError) {
+//                    var_dump($this->_emailQueryResult, $queryArray);
+//                }
+            $DU = $queryArray[$this->_DU];
+            $DD = $queryArray[$this->_DD];
+            $SU = $queryArray[$this->_SU];
+            $SD = $queryArray[$this->_SD];
+            $isAccount = (NULL == $DU);
+
+
+            $currentRow = '<td class="' . $UserAcctClass . '">' . $SU . '</td>'
+                    . '<td class="' . $SD_class . '">@' . $SD . '</td>';
+            if ($isAccount) {
+;
             } else {
                 $myTable .= '<tr class="' . $alias . '">'
                         . $currentRow

@@ -110,13 +110,9 @@ and open the template in the editor.
                 <input id="sortType" type="hidden" name="sortType" value="" />
                 <input id="deleteUsername" type="hidden" name="deleteUsername" value="" />
                 <input id="deleteDomain" type="hidden" name="deleteDomain" value="" />
-                <div>
-                    email addresses
-                </div>
                 <table class="scroll">
 
                     <?php
-                    // put your code here
                     echo $myTable;
                     ?>
                 </table></form>
