@@ -4,5 +4,5 @@
     "keywords": ["util", "functional", "server", "client", "browser", "email"],
     "author": "Chris Fedun",
     "contributors": [],
-    "dependencies": {"DarkPhoenix6/299-Scripts"}
+    "dependencies": {"https://github.com/DarkPhoenix6/299-Scripts"}
 }
