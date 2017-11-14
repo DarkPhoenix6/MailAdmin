@@ -192,15 +192,15 @@ class EmailData {
         }
         return $myTable;
     }
-    
+
     public function displayAliases() {
         $isError = FALSE;
         $numRows = 0;
         $queryArray;
         $myTable = ''
-                . '<thead><tr><th colspan="2">Email Address</th><th></th>'
+                . '<thead><tr><th></th><th colspan="2">Email Address</th><th></th>'
                 . '<th colspan="2">Alias Account</th></tr>'
-                . '<tr><th onclick="submitSortForm(\'SOURCEUSER\', \'Aliases\')'
+                . '<tr><th></th><th onclick="submitSortForm(\'SOURCEUSER\', \'Aliases\')'
                 . '">User</th><th onclick="submitSortForm(\'SOURCEDOMAIN\', '
                 . '\'Aliases\')">Domain</th><th></th><th onclick="'
                 . 'submitSortForm(\'DESTUSER\', \'Aliases\')">User</th>'
@@ -310,6 +310,14 @@ class EmailData {
         return $this->queryDB($result, $domainQuery);
     }
 
+    Public function getAccounts(&$result) {
+        $isError = FALSE;
+        $sortType = self::SOURCEDOMAIN;
+        $this->freeResult($this->_emailQueryResult);
+        $query = self::EMAIL_QUERY . " ORDER BY " . $sortType;
+        return $this->queryDB($result, $query);
+    }
+
     public function getDomainOptions() {
         $isError = FALSE;
         $myOptions = '';
@@ -323,6 +331,23 @@ class EmailData {
             $myOptions .= '<option>No Domains Created yet.</option>';
         } else {
             $this->_domainOptions($myOptions, $result, $isError, $queryArray);
+        }
+        return $myOptions;
+    }
+
+    public function getAccountOptions() {
+        $isError = FALSE;
+        $myOptions = '';
+        $result = FALSE;
+        $queryArray;
+        if (FALSE !== ($isError = $this->getAccounts($result))) {
+            ;
+        } elseif (FALSE !== ($isError = $this->_database->getCount($result, $numRows))) {
+            ;
+        } elseif ($numRows == 0) {
+            $myOptions .= '<option>No Domains Created yet.</option>';
+        } else {
+            $this->_accountOptions($myOptions, $result, $isError, $queryArray);
         }
         return $myOptions;
     }
@@ -446,13 +471,13 @@ class EmailData {
             $myTable .= '</tr>';
         }
     }
-    
-    
-        private function _displayAliases(&$myTable, &$isError, &$queryArray) {
+
+    private function _displayAliases(&$myTable, &$isError, &$queryArray) {
         $SD_class = 'td_alignLeft';
         $UserAcctClass = 'td_alignRight';
         $accountColspan = 3;
         $alias = 'aliasRow';
+        $class = 'delete';
         while (FALSE === ($isError = $this->_database->fetchArray($this->_emailQueryResult, $queryArray)) && $queryArray != NULL) {
 //                if (!$isError) {
 //                    var_dump($this->_emailQueryResult, $queryArray);
@@ -467,9 +492,12 @@ class EmailData {
             $currentRow = '<td class="' . $UserAcctClass . '">' . $SU . '</td>'
                     . '<td class="' . $SD_class . '">@' . $SD . '</td>';
             if ($isAccount) {
-;
+                ;
             } else {
                 $myTable .= '<tr class="' . $alias . '">'
+                        . '<td class=""><span class="' . $class . '" onclick="'
+                        . 'submitAliasDelete(\'' . $SU . '\', \'' . $SD . '\', \'' . $DU . '\', \'' . $DD . '\',\'Aliases\')">'
+                        . ' &#xd7;&nbsp;Delete</span></td>'
                         . $currentRow
                         . '<td >Is an Alias of:</td>'
                         . '<td class="' . $UserAcctClass . '">' . $DU . '</td>'
@@ -483,6 +511,33 @@ class EmailData {
         while (FALSE === ($isError = $this->_database->fetchArray($result, $queryArray)) && $queryArray != NULL) {
             $myOptions .= '<option value="' . $queryArray["name"] . '">' . $queryArray['name'] . '</option>';
         }
+    }
+
+    private function _accountOptions(&$myOptions, $result, &$isError, &$queryArray) {
+        
+        $emailDomain = "";
+        while (FALSE === ($isError = $this->_database->fetchArray($result, $queryArray)) && $queryArray != NULL) {
+            $DU = $queryArray[$this->_DU];
+            $DD = $queryArray[$this->_DD];
+            $SU = $queryArray[$this->_SU];
+            $SD = $queryArray[$this->_SD];
+            $isAccount = (NULL == $DU);
+            if ($isAccount){
+                if($SD != $emailDomain){
+                    if($emailDomain === ""){
+                        $myOptions .= '<optgroup label="' . $SD . '">';
+                    }else {
+                        $myOptions .= '</optgroup>'
+                                . '<optgroup label="' . $SD . '">';
+                    }
+                    $emailDomain = $SD;
+                    
+                }
+                $myOptions .= '<option value="' . $SU. '@'. $SD . '">' . $SU. '@'. $SD . '</option>';
+            }
+            
+        }
+        $myOptions .= '</optgroup>';
     }
 
     private function _displayDomains(&$myTable, $result, &$isError, &$queryArray) {
