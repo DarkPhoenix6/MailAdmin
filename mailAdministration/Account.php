@@ -116,26 +116,31 @@ and open the template in the editor.
                     echo $myTable;
                     ?>
                 </table></form>
+            <div class="flex">
+                <form class="column" id="accountcreation" method="post" 
+                      action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                    <fieldset>
+                        <legend> Account Creation </legend>
+                        <label for="user">Email:</label>
 
-            <form id="accountcreation" method="post" 
-                  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                <fieldset>
-                    <legend> Account Creation </legend>
-                    <label for="user">Email:</label>
 
-                    <input type="hidden" name="createAccount" id="createAccount" value="1"/>
-                    <input name ="user" type="text" required="" autocomplete="off" /> @ 
-                    <select name="domain" required="">
-                        <?php
-                        echo $myDomains;
-                        ?>
-                    </select>
-                    <br>
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" required="" autocomplete="off" />
-                </fieldset>
-                <input type="submit" name="submit" value="Submit" />
-            </form>
+                        <input name ="user" type="text" required="" autocomplete="off" /> @ 
+                        <select name="domain" required="">
+                            <?php
+                            echo $myDomains;
+                            ?>
+                        </select>
+                        <br>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required="" autocomplete="off" />
+                        <input type="hidden" name="createAccount" id="createAccount" value="1"/>
+                    </fieldset>
+                    <input type="submit" name="submit" value="Submit" />
+                </form>
+            </div>
+            <footer>
+                <p>&copy; Copyright  by Chris Fedun</p>
+            </footer>
         </main>
         <script src="js/require.js"></script>
         <script src="js/navbar.js"></script>

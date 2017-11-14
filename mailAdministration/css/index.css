@@ -132,9 +132,9 @@ div.add_margin > a {
 @media only screen and (min-width: 600px) { /* styles for tablet portrait*/ }
 @media only screen and (min-width: 900px) { /* styles for tablet landscape*/ }
 @media only screen and (min-width: 1200px) { /* styles for desktop*/
-/*    table {
-        min-width: 50%;
-    }	*/
+    /*    table {
+            min-width: 50%;
+        }	*/
 }
 @media only screen and (min-width: 1800px) { /* styles for big desktop*/}
 

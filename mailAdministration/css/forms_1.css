@@ -1,0 +1,157 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 13-Nov-2017, 8:29:23 PM
+    Author     : cfedun
+*/
+
+body {
+
+}
+.display_inline {
+	display: inline;
+}
+.display_none {
+	display: none;
+}
+label, input {
+	display: inline-block;
+	position: relative;
+}
+input, select {
+	margin: 0 0 0.5em 0.4em;
+}
+input {
+	box-sizing: border-box;
+	border-radius: 4px;
+	max-width: 95%;
+}
+input[value=""] + span:after {
+	content: "";
+}
+/*input:invalid:not(:placeholder-shown)+ span:after {
+ display: inline;
+ content: '✖';
+ padding-left: 5px;
+ }this works too but requires :not(:placeholder-shown) for everything affected*/
+input:invalid + span:after {
+	content: '✖'; /* \00d7*/
+	padding-left: 5px;
+}
+input:valid + span:after {
+	content: '✓'; /* \2713 */
+	padding-left: 5px;
+}
+input[type=text], input[type=tel], input[type=email] {
+	width: 45%;
+	box-sizing: border-box;
+}
+input[type=number] {
+	width: 5em;
+}
+input:not(:placeholder-shown) + span:after {
+	display: inline;
+	position: relative;
+}
+input:placeholder-shown + span:after {
+	display: none;
+	content: "";
+}
+input + input {
+	float: right;
+}
+textarea, select {
+	padding: 0.5em;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+textarea {
+	width: 50em;
+	height: 6em;
+	margin: 0.5em 0;
+}
+label {
+	color: green;
+	text-align: right;
+	width: 25%;
+}
+label.add_margin {
+	margin-bottom: 2em;
+}
+label.add_padding {
+	padding-bottom: 2em;
+}
+label.valign {
+	display: inline-block;
+	vertical-align: middle;
+}
+section.test_section, .container {
+	border: 1px solid gray;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+section.test_section {
+	padding: 0.5em;
+	margin: 0.5em 0;
+}
+.container {
+	padding-left: 8.65%; /*5em;*/
+	padding-right: 8.65%; /*5em;*/
+}
+section.inputs {
+	/*text-align: center;*/
+}
+fieldset {
+	border-radius: 4px;
+	padding: 0.5em;
+	margin: 0.5em 0;
+	border-style: outset;
+	border-width: 2px;
+}
+header {
+	background-color: rgb(183, 123, 130); /* #B77B82  TPX Dusty Rose*/
+	padding: 1em 0 1em 1em;
+	border-radius: 4px;
+}
+#button {
+	border-radius: 0.375em;
+}
+.my_button {
+	border: 1px solid green;
+	color: black;
+	padding-top: 0.325em;
+	padding-bottom: 0.325em;
+	background-color: silver;
+	width: 8.25em;
+	margin-top: 1em;
+	margin-bottom: 3.25em;
+}
+.my_button:target, .my_button:hover {
+	border-color: lightblue;
+}
+form {
+	width: 100%;
+}
+select {
+	/*width: 30%;*/
+	/*margin: 0.5em 0;*/
+	vertical-align: top;
+}
+div.center {
+	text-align: center;
+}
+.right {
+	float: right;
+}
+.flex, .column {
+	display: -webkit-flex;
+	display: flex;
+}
+.column {
+	-webkit-flex-direction: column;
+	flex-direction: column;
+}

@@ -7,9 +7,13 @@ and open the template in the editor.
     Created on : 9-Nov-2017, 1:37:32 PM
     Author     : cfedun
 */
-
+@import "forms.css";
 body {
     background-color: skyblue;
+}
+
+footer {
+    clear: both;
 }
 
 .delete {
@@ -24,11 +28,16 @@ body {
 }
 .td_alignLeft {
     text-align: left;
+    padding: 0.5em 1.75em 0.5em 0.25em;
 }
 .td_alignRight {
     text-align: right;
+    padding: 0.5em 0.25em 0.5em 1.75em;
 }
 
 .center {
     text-align: center;
 }
+
+
+

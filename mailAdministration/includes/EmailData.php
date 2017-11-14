@@ -514,7 +514,7 @@ class EmailData {
     }
 
     private function _accountOptions(&$myOptions, $result, &$isError, &$queryArray) {
-        
+
         $emailDomain = "";
         while (FALSE === ($isError = $this->_database->fetchArray($result, $queryArray)) && $queryArray != NULL) {
             $DU = $queryArray[$this->_DU];
@@ -522,20 +522,18 @@ class EmailData {
             $SU = $queryArray[$this->_SU];
             $SD = $queryArray[$this->_SD];
             $isAccount = (NULL == $DU);
-            if ($isAccount){
-                if($SD != $emailDomain){
-                    if($emailDomain === ""){
+            if ($isAccount) {
+                if ($SD != $emailDomain) {
+                    if ($emailDomain === "") {
                         $myOptions .= '<optgroup label="' . $SD . '">';
-                    }else {
+                    } else {
                         $myOptions .= '</optgroup>'
                                 . '<optgroup label="' . $SD . '">';
                     }
                     $emailDomain = $SD;
-                    
                 }
-                $myOptions .= '<option value="' . $SU. '@'. $SD . '">' . $SU. '@'. $SD . '</option>';
+                $myOptions .= '<option value="' . $SU . '@' . $SD . '">' . $SU . '@' . $SD . '</option>';
             }
-            
         }
         $myOptions .= '</optgroup>';
     }

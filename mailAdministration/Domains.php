@@ -109,19 +109,21 @@ and open the template in the editor.
                     echo $myTable;
                     ?>
                 </table></form>
-
-            <form name="domainCreation" id="domainCreation" method="post" 
+            <div class="flex">
+            <form class="column" name="domainCreation" id="domainCreation" method="post" 
                   action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <fieldset>
                     <legend> Domain Creation </legend>
                     <label for="domain">Domain:</label>
-
-                    <input type="hidden" name="createDomain" id="createAccount" value="1"/>
                     <input id="domain" name ="domain" type="text" required="" autocomplete="off" />  
-
+                    <input type="hidden" name="createDomain" id="createAccount" value="1"/>
                 </fieldset>
                 <input type="submit" name="submit" value="Submit" />
             </form>
+            </div>
+            <footer>
+                <p>&copy; Copyright  by Chris Fedun</p>
+            </footer>
         </main>
         <script src="js/require.js"></script>
         <script src="js/navbar.js"></script>
