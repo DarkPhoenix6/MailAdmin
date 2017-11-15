@@ -24,7 +24,12 @@ thead tr th {
     line-height: 30px;
     /* text-align: left; */
 }
-
+tr td:nth-of-type(3){
+    min-width: 5.5em;
+}
+table.scroll tbody tr td:not(:first-of-type){
+    min-width: 5.5em;
+}
 table.scroll tbody {
     height: auto;
     max-height: 70vh;
@@ -42,4 +47,9 @@ tbody td, thead th {
 
 tbody td:last-child, thead th:last-child {
     border-right: none;
+}
+
+table.scroll tbody tr td,
+table.scroll thead tr th {
+    font-size: 100%;
 }
