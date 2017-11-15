@@ -93,9 +93,10 @@ class EmailData {
     public function updatePassword($email, $pass) {
         $password_query = "UPDATE virtual_users SET password="
                 . $this->generatePassString($pass)
-                . " WHERE email=" . $email . ";";
-        $result = '';
-        return $this->queryDB($result, $password_query);
+                . " WHERE `email`='" . $email . "';";
+        $isError = FALSE;
+        $this->_passwordReset($isError, $password_query);
+        return $isError;
     }
 
     public function createDomain($domain) {
@@ -166,7 +167,7 @@ class EmailData {
         $myTable = ''
                 . '<thead><tr><th colspan="2">Email Address</th><th></th>'
                 . '<th colspan="2">Alias Account</th></tr>'
-                . '<tr><th onclick="submitSortForm(\'SOURCEUSER\', \'Overview\')">User</th><th onclick="submitSortForm(\'SOURCEDOMAIN\', \'Overview\')">Domain</th><th></th><th onclick="submitSortForm(\'DESTUSER\', \'Overview\')">User</th><th onclick="submitSortForm(\'DESTDOMAIN\', \'Overview\')">Domain</th></tr></thead><tbody>';
+                . '<tr><th class="sort" onclick="submitSortForm(\'SOURCEUSER\', \'Overview\')">User</th><th class="sort" onclick="submitSortForm(\'SOURCEDOMAIN\', \'Overview\')">Domain</th><th></th><th class="sort" onclick="submitSortForm(\'DESTUSER\', \'Overview\')">User</th><th class="sort" onclick="submitSortForm(\'DESTDOMAIN\', \'Overview\')">Domain</th></tr></thead><tbody>';
         if (FALSE !== ($isError = $this->getEmailOverview())) {
             ;
         } elseif (FALSE !== ($isError = $this->_database->getCount($this->_emailQueryResult, $numRows))) {
@@ -200,11 +201,11 @@ class EmailData {
         $myTable = ''
                 . '<thead><tr><th></th><th colspan="2">Email Address</th><th></th>'
                 . '<th colspan="2">Alias Account</th></tr>'
-                . '<tr><th></th><th onclick="submitSortForm(\'SOURCEUSER\', \'Aliases\')'
-                . '">User</th><th onclick="submitSortForm(\'SOURCEDOMAIN\', '
-                . '\'Aliases\')">Domain</th><th></th><th onclick="'
+                . '<tr><th></th><th class="sort" onclick="submitSortForm(\'SOURCEUSER\', \'Aliases\')'
+                . '">User</th><th class="sort" onclick="submitSortForm(\'SOURCEDOMAIN\', '
+                . '\'Aliases\')">Domain</th><th></th><th class="sort" onclick="'
                 . 'submitSortForm(\'DESTUSER\', \'Aliases\')">User</th>'
-                . '<th onclick="submitSortForm(\'DESTDOMAIN\', \'Aliases\')">'
+                . '<th class="sort" onclick="submitSortForm(\'DESTDOMAIN\', \'Aliases\')">'
                 . 'Domain</th></tr></thead><tbody>';
         if (FALSE !== ($isError = $this->getEmailOverview())) {
             ;
@@ -240,8 +241,8 @@ class EmailData {
                 . '<thead><tr><th colspan="3">Email Accounts</th>'
                 . '</tr>'
                 . '<tr><th></th>'
-                . '<th onclick="submitSortForm(\'SOURCEUSER\', \'Accounts\')">'
-                . 'User</th><th onclick="submitSortForm(\'SOURCEDOMAIN\', '
+                . '<th class="sort" onclick="submitSortForm(\'SOURCEUSER\', \'Accounts\')">'
+                . 'User</th><th class="sort" onclick="submitSortForm(\'SOURCEDOMAIN\', '
                 . '\'Accounts\')">Domain</th></tr></thead><tbody>';
         if (FALSE !== ($isError = $this->getEmailOverview())) {
             ;
@@ -404,6 +405,10 @@ class EmailData {
         }
 //        var_dump($this->_database, $sql_VirtualAlias, $sql_VirtualUser);
         $Error = $this->_database->verifyTransactions();
+    }
+
+    protected function _passwordReset(&$isError, $query) {
+        $this->_domainSubMethod($isError, $query);
     }
 
     // PRIVATE METHODS

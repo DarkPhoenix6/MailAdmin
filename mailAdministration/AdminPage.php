@@ -77,19 +77,17 @@ and open the template in the editor.
         </div>
         <main>
             <div class="main">
-                <form id="Overview" class="current" name="Overview" method="post" 
-                      action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                    <input id="sortType"type="hidden" name="sortType" value="SOURCEUSER" />
+                <div class="fieldset">
+                    <h1><span>Overview</span></h1>
+                    <form id="Overview" class="current" name="Overview" method="post" 
+                          action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                        <input id="sortType"type="hidden" name="sortType" value="SOURCEUSER" />
 
-                    <table class="scroll">
-                        <?php echo "$myTable"; ?>
-                    </table>
-                </form>
-                <form id="account">
-                    hi
-                    This is the Account page
-                    <a href="Account.php" >Click here to create an email account</a>
-                </form>
+                        <table class="scroll">
+                            <?php echo "$myTable"; ?>
+                        </table>
+                    </form>
+                </div>
                 <?php // echo var_dump($_SESSION); ?>
                 <footer>
                     <p>&copy; Copyright  by Chris Fedun</p>

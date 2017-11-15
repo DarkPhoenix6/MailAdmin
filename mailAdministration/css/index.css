@@ -4,29 +4,7 @@
 body {
     background-color: skyblue;
 }
-table {
-    border: 1px solid black;
-    border-collapse: collapse;
-    margin-left: 4px;
-    /*min-width: 40vh;*/
-    /*max-width: 80vh;*/
-    /*width: auto;*/
-}
-thead {
-    background-color: #800000;
-    color: #FFFFFF;
-    /*position:fixed;*/
-}
-th, td {
-    border: 1px solid black;
-    padding: 0.5em 1em;
-}
-tr, th, td, tbody, thead, tfoot, table {
-    font-family: "Times New Roman", Times, serif;
-}
-tbody tr:nth-child(even) {
-    background-color: #cccccc;
-}
+
 .main {
     /*margin-top: 52px;*/
 }
@@ -86,14 +64,7 @@ aside {
     border-left: 1px solid black;
 
 }
-.clear_before:before {
-    clear: both;
-}
 
-.center {
-    text-align:center;
-
-}
 .add_margin{
     margin-left: 25%;
 

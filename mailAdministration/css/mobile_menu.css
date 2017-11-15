@@ -7,7 +7,7 @@
 #navbar {
     display: block;
 }
-@media screen and (max-width: 520px) {
+@media screen and (max-width: 703px) {
     #mobile_menu {
         display: block;
     }

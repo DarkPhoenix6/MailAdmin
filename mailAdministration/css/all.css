@@ -7,6 +7,7 @@ and open the template in the editor.
     Created on : 9-Nov-2017, 1:37:32 PM
     Author     : cfedun
 */
+
 @import "forms.css";
 body {
     background-color: skyblue;
@@ -19,12 +20,16 @@ footer {
 .delete {
     font-style: oblique;
     font-weight: bold;
+    cursor: pointer;
 }
-
 .delete:hover {
     font-weight: bolder;
     color: blue;
     text-decoration: underline;
+
+}
+.pointer {
+    cursor: pointer;
 }
 .td_alignLeft {
     text-align: left;
@@ -37,4 +42,27 @@ footer {
 
 .center {
     text-align: center;
+}
+.clear_before:before {
+    clear: both;
+}
+.clear:after {
+    clear: both;
+    content: "";
+    display: table;
+}
+
+.sort {
+    cursor: pointer;
+}
+
+.sort:after {
+    text-decoration: underline;
+}
+
+.error, .success{
+    font-size: 1.17em;
+}
+.error {
+    color: red;
 }

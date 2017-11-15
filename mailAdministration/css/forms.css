@@ -8,9 +8,6 @@ and open the template in the editor.
     Author     : cfedun
 */
 
-body {
-
-}
 .display_inline {
     display: inline;
 }
@@ -37,10 +34,15 @@ input[type=email] {
     width: 55%; 
 }
 input[type=text] {
-    width: 30%;
+    /*width: 30%;*/
+    width: 10em;
 }
 input[type=number] {
     width: 5em;
+}
+input[type=password] {
+    max-width: 80%;
+    width: 14em;
 }
 input[type="submit"] {
     margin: 0.25em;
@@ -129,25 +131,69 @@ div.center {
 form.column {
     margin: 1em;
 }
+.fieldset {
+  border: 2px groove threedface;
+  border-top: none;
+  padding: 0.5em;
+  margin: 1em 2px;
+}
 
+.fieldset>h1 {
+  font: 1.17em bolder; 
+  margin: -1em -0.5em 0;
+}
+
+.fieldset>h1>span {
+  float: left;
+}
+
+.fieldset>h1:before {
+  border-top: 2px groove threedface;
+  border-left: 2px groove threedface;
+  content: ' ';
+  float: left;
+  
+  margin: 0.5em 2px 0 0;
+  width: 0.75em;
+}
+
+.fieldset>h1:after {
+  border-top: 2px groove threedface;
+  content: ' ';
+  display: block;
+  height: 1.5em;
+  left: 2px;
+  margin: 0 2px 0 0;
+  overflow: hidden;
+  position: relative;
+  top: 0.5em;
+}
 #Accounts, #Aliases, #Domains {
     float: left;
 }
-#accountcreation, #aliascreation, #redirectCreation, #domainCreation {
+#Accounts:after, #Aliases, #Domains {
+    clear: both;
+}
+#accountcreation, #resetPass, #aliascreation, #redirectCreation, #domainCreation {
+    clear: left;
     float: right;
 
 }
 
-#aliascreation, #redirectCreation {
-    max-width: 50%
+#aliascreation, #redirectCreation, #resetPass {
+    /*max-width: 50%;*/
+    width: 28.125em; /*450px;*/
 }
-
+#accountcreation, #resetPass, #aliascreation, #redirectCreation {
+    min-width: 28.125em;
+}
 #domainCreation {
-    max-width: 40%
+    /*max-width: 40%;*/
+    width: 20em;
 }
 
 #accountcreation {
-
+   width: 28.125em; /*450px;*/
 }
 
 
@@ -166,10 +212,10 @@ form.column {
 @media only screen and (min-width: 900px) { /* styles for tablet landscape*/ }
 @media only screen and (min-width: 1200px) { /* styles for desktop*/
     #Accounts, #Aliases, #Domains {
-        max-width: 60%;
+        /*max-width: 60%;*/
     }	
     #accountcreation, #aliascreation, #redirectCreation, #domainCreation {
-        max-width: 50%
+        /*max-width: 50%;*/
     }
 }
 @media only screen and (min-width: 1700px) {

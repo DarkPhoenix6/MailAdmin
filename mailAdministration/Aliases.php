@@ -80,71 +80,76 @@ and open the template in the editor.
         </div>
         <main>
             <div class="main">
-                <form id="Aliases" class="current" name="Aliases" method="post" 
-                      action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                    <input id="sortType"type="hidden" name="sortType" value="" />
+                <div class="fieldset">
+                    <h1><span>Aliases</span></h1>
+                    <div class="clear">
+                        <form id="Aliases" class="current" name="Aliases" method="post" 
+                              action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                            <input id="sortType"type="hidden" name="sortType" value="" />
 
-                    <table class="scroll">
-                        <?php echo "$myTable"; ?>
-                    </table>
-                </form>
-                <div class="flex">
-                    <form class="column" id="aliascreation" name="aliascreation" method="post" 
-                          action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                        <fieldset>
-                            <legend> Alias Creation </legend>
-                            <label for="user">Alias:</label>
-
-
-                            <input name ="user" type="text" required="" autocomplete="off" /> @ 
-                            <select name="domain" required="">
-                                <?php
-                                echo $myDomains;
-                                ?>
-                            </select>
-                            <br>
-                            <label for="destination">Destination Account:</label>
+                            <table class="scroll">
+                                <?php echo "$myTable"; ?>
+                            </table>
+                        </form>
+                        <div class="flex">
+                            <form class="column" id="aliascreation" name="aliascreation" method="post" 
+                                  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                                <fieldset>
+                                    <legend> Alias Creation </legend>
+                                    <label for="user">Alias:</label>
 
 
-<!--<input name ="userDesr" type="text" required="" autocomplete="off" /> @--> 
-                            <select id="destination" name="destination" required="">
-                                <?php
-                                echo $myAccounts;
-                                ?>
-                            </select>
-                            <br>
-                            <input type="hidden" name="createAlias" id="createAlias" value="1"/>
-                        </fieldset>
-                        <input type="submit" name="submitAlias" value="Submit" />
-                    </form>
-                </div>
-                    <br>
-                    <div class="flex">
-                    <form class="column" id="redirectCreation" name="redirectCreation" method="post" 
-                          action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                        <fieldset>
-                            <legend> Redirect/Forwarding Creation </legend>
-                            <label for="userRedirect">Alias:</label>
-
-
-                            <input name ="userRedirect" type="text" required="" autocomplete="off" /> @ 
-                            <select name="domain" required="">
-                                <?php
-                                echo $myDomains;
-                                ?>
-                            </select>
-                            <br>
-                            <label for="destinationRedir">Destination:</label>
+                                    <input name ="user" type="text" required="" autocomplete="off" /> @ 
+                                    <select name="domain" required="">
+                                        <?php
+                                        echo $myDomains;
+                                        ?>
+                                    </select>
+                                    <br>
+                                    <label for="destination">Destination:</label>
 
 
 <!--<input name ="userDesr" type="text" required="" autocomplete="off" /> @--> 
-                            <input type="email" id="destinationRedir" name="destination"  required="" autocomplete="off" />
+                                    <select id="destination" name="destination" required="">
+                                        <?php
+                                        echo $myAccounts;
+                                        ?>
+                                    </select>
+                                    <br>
+                                    <input type="hidden" name="createAlias" id="createAlias" value="1"/>
+                                </fieldset>
+                                <input type="submit" name="submitAlias" value="Submit" />
+                            </form>
+                        </div>
+                        <br>
+                        <div class="flex">
+                            <form class="column" id="redirectCreation" name="redirectCreation" method="post" 
+                                  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                                <fieldset>
+                                    <legend> Redirect/Forwarding Creation </legend>
+                                    <label for="userRedirect">Alias:</label>
 
-                            <input type="hidden" name="createRedirect" id="createRedirect" value="1"/>
-                            <br>
-                        </fieldset>
-                        <input type="submit" name="submitRedirect" value="Submit" />
-                    </form>
+
+                                    <input name ="userRedirect" type="text" required="" autocomplete="off" /> @ 
+                                    <select name="domain" required="">
+                                        <?php
+                                        echo $myDomains;
+                                        ?>
+                                    </select>
+                                    <br>
+                                    <label for="destinationRedir">Destination:</label>
+
+
+<!--<input name ="userDesr" type="text" required="" autocomplete="off" /> @--> 
+                                    <input type="email" id="destinationRedir" name="destination"  required="" autocomplete="off" />
+
+                                    <input type="hidden" name="createRedirect" id="createRedirect" value="1"/>
+                                    <br>
+                                </fieldset>
+                                <input type="submit" name="submitRedirect" value="Submit" />
+                            </form>
+                        </div>
+                    </div>
                 </div>
                 <?php // echo var_dump($_SESSION); ?>
                 <footer>

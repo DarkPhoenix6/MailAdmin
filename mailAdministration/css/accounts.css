@@ -9,7 +9,7 @@ and open the template in the editor.
 */
 @import "normalize.css";
 @import "tables.css";
-@import "all.css";
+
 
 body {
 	background-color: skyblue;

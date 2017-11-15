@@ -97,29 +97,34 @@ and open the template in the editor.
         </div>
         <main class="main">
             <?php echo $displayBlock; ?>
-            <form id="Domains" method="post" 
-                  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                <input id="sortType" type="hidden" name="sortType" value="" />
-                <input id="deleteDomain" type="hidden" name="deleteDomain" value="" />
+            <div class="fieldset">
+                <h1><span>Domains</span></h1>
+                <div class="clear">
+                    <form id="Domains" method="post" 
+                          action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                        <input id="sortType" type="hidden" name="sortType" value="" />
+                        <input id="deleteDomain" type="hidden" name="deleteDomain" value="" />
 
-                <table class="scroll">
+                        <table class="scroll">
 
-                    <?php
-                    // put your code here
-                    echo $myTable;
-                    ?>
-                </table></form>
-            <div class="flex">
-            <form class="column" name="domainCreation" id="domainCreation" method="post" 
-                  action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                <fieldset>
-                    <legend> Domain Creation </legend>
-                    <label for="domain">Domain:</label>
-                    <input id="domain" name ="domain" type="text" required="" autocomplete="off" />  
-                    <input type="hidden" name="createDomain" id="createAccount" value="1"/>
-                </fieldset>
-                <input type="submit" name="submit" value="Submit" />
-            </form>
+                            <?php
+                            // put your code here
+                            echo $myTable;
+                            ?>
+                        </table></form>
+                    <div class="flex">
+                        <form class="column" name="domainCreation" id="domainCreation" method="post" 
+                              action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                            <fieldset>
+                                <legend> Domain Creation </legend>
+                                <label for="domain">Domain:</label>
+                                <input id="domain" name ="domain" type="text" required="" autocomplete="off" />  
+                                <input type="hidden" name="createDomain" id="createAccount" value="1"/>
+                            </fieldset>
+                            <input type="submit" name="submit" value="Submit" />
+                        </form>
+                    </div>
+                </div>
             </div>
             <footer>
                 <p>&copy; Copyright  by Chris Fedun</p>

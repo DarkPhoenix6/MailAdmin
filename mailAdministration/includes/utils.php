@@ -14,8 +14,12 @@ function strict_input_Filter($data) {
     return test_input($data);
 }
 
-function filterEmailPattern($data) {
+function filterMultipleEmailPattern($data) {
     return ( 1 == preg_match('/^([\w+-.%]+@[\w\-.]+\.[A-Za-z]{2,4},*[\W]*)+$/', $data));
+}
+
+function filterEmailPattern($data) {
+    return ( 1 == preg_match('/^([\w+-.%]+@[\w\-.]+\.[A-Za-z]{2,4},*[\W]*)$/', $data));
 }
 
 function filterEmail($email) {
