@@ -25,10 +25,10 @@ thead tr th {
     /* text-align: left; */
 }
 tr td:nth-of-type(3){
-    min-width: 5.5em;
+    min-width: 6em;
 }
 table.scroll tbody tr td:not(:first-of-type){
-    min-width: 5.5em;
+    min-width: 6em;
 }
 table.scroll tbody {
     height: auto;
