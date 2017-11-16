@@ -205,7 +205,9 @@ form.column {
 
 }
 @media only screen and (min-width: 520px) {
-
+    #Domains {
+        float: none;
+    }
 }
 @media only screen and (max-width: 575px) {
     table {
@@ -214,6 +216,11 @@ form.column {
 }
 @media only screen and (min-width: 600px) { /* styles for tablet portrait*/ }
 @media only screen and (min-width: 900px) { /* styles for tablet landscape*/ }
+@media only screen and (min-width: 916px) {
+    #Accounts {
+        float: none;
+    }
+}
 @media only screen and (min-width: 1200px) { /* styles for desktop*/
     #Accounts, #Aliases, #Domains {
         /*max-width: 60%;*/
