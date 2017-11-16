@@ -132,41 +132,41 @@ form.column {
     margin: 1em;
 }
 .fieldset {
-  border: 2px groove threedface;
-  border-top: none;
-  padding: 0.5em;
-  margin: 1em 2px;
+    border: 2px groove threedface;
+    border-top: none;
+    padding: 0.5em;
+    margin: 1em 2px;
 }
 
 .fieldset>h1 {
-  font: 1.17em bolder; 
-  margin: -1em -0.5em 0;
+    font: 1.17em bolder; 
+    margin: -1em -0.5em 0;
 }
 
 .fieldset>h1>span {
-  float: left;
+    float: left;
 }
 
 .fieldset>h1:before {
-  border-top: 2px groove threedface;
-  border-left: 2px groove threedface;
-  content: ' ';
-  float: left;
-  
-  margin: 0.5em 2px 0 0;
-  width: 0.75em;
+    border-top: 2px groove threedface;
+    border-left: 2px groove threedface;
+    content: ' ';
+    float: left;
+
+    margin: 0.5em 2px 0 0;
+    width: 0.75em;
 }
 
 .fieldset>h1:after {
-  border-top: 2px groove threedface;
-  content: ' ';
-  display: block;
-  height: 1.5em;
-  left: 2px;
-  margin: 0 2px 0 0;
-  overflow: hidden;
-  position: relative;
-  top: 0.5em;
+    border-top: 2px groove threedface;
+    content: ' ';
+    display: block;
+    height: 1.5em;
+    left: 2px;
+    margin: 0 2px 0 0;
+    overflow: hidden;
+    position: relative;
+    top: 0.5em;
 }
 #Accounts, #Aliases, #Domains {
     float: left;
@@ -180,12 +180,16 @@ form.column {
 
 }
 
+
+#accountcreation, #resetPass, #aliascreation, #redirectCreation {
+    /*min-width: 28.125em;*/
+    min-width: 30.365em;
+    width:auto;
+}
+
 #aliascreation, #redirectCreation, #resetPass {
     /*max-width: 50%;*/
-    width: 28.125em; /*450px;*/
-}
-#accountcreation, #resetPass, #aliascreation, #redirectCreation {
-    min-width: 28.125em;
+    /*width: 28.125em; 450px;*/
 }
 #domainCreation {
     /*max-width: 40%;*/
@@ -193,7 +197,7 @@ form.column {
 }
 
 #accountcreation {
-   width: 28.125em; /*450px;*/
+    /*width: 28.125em; 450px;*/
 }
 
 
@@ -218,6 +222,43 @@ form.column {
         /*max-width: 50%;*/
     }
 }
+
+@media only screen and (max-width: 1542px) {
+    #Aliases {
+        float: none;
+    }
+}
+
+@media only screen and (min-width: 1543px) {
+    #Accounts, #Aliases, #Domains {
+        float: left;
+    }
+    #Accounts:after, #Aliases:after, #Domains {
+        clear: both;
+    }
+    #accountcreation, #resetPass, #aliascreation, #redirectCreation, #domainCreation {
+        clear: left;
+        float: right;
+
+    }
+
+
+    #accountcreation, #resetPass, #aliascreation, #redirectCreation {
+        /*min-width: 28.125em;*/
+        min-width: 30.365em;
+        width:auto;
+    }
+
+    #aliascreation, #redirectCreation, #resetPass {
+        /*max-width: 50%;*/
+        /*width: 28.125em; 450px;*/
+    }
+    #domainCreation {
+        /*max-width: 40%;*/
+        width: 20em;
+    }
+
+} 
 @media only screen and (min-width: 1700px) {
 
 }
