@@ -105,7 +105,7 @@ and open the template in the editor.
                         <input id="sortType" type="hidden" name="sortType" value="" />
                         <input id="deleteDomain" type="hidden" name="deleteDomain" value="" />
 
-                        <table class="scroll">
+                        <table class="scroll" id="myTable">
 
                             <?php
                             // put your code here
@@ -133,6 +133,7 @@ and open the template in the editor.
         <script src="js/require.js"></script>
         <script src="js/navbar.js"></script>
         <script src="js/utils.js"></script>
+        <script src="js/sortTable.js"></script>
         <script src="js/tableScrollbar.js"></script>
     </body>
 </html>

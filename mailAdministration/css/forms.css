@@ -204,7 +204,7 @@ form.column {
 @media only screen and (max-width: 599px) {/* styles for phone*/ 
 
 }
-@media only screen and (min-width: 520px) {
+@media only screen and (max-width: 520px) {
     #Domains {
         float: none;
     }
@@ -216,7 +216,7 @@ form.column {
 }
 @media only screen and (min-width: 600px) { /* styles for tablet portrait*/ }
 @media only screen and (min-width: 900px) { /* styles for tablet landscape*/ }
-@media only screen and (min-width: 916px) {
+@media only screen and (max-width: 916px) {
     #Accounts {
         float: none;
     }

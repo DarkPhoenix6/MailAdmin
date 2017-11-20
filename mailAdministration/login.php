@@ -9,6 +9,8 @@ if ((filter_input(INPUT_POST, 'username')) && (filter_input(INPUT_POST, 'passwor
     $authcheck = new Auth();
     $_SESSION['auth'] = $authcheck->checkPassword($username, $pass);
     if ($_SESSION['auth']) {
+        $_SESSION['username'] = $username;
+   
         $_SESSION['last_activity'] = time(); //your last activity was now, having logged in.
         $_SESSION['expire_time'] = 0.25 * 60 * 60; // 15 minutes in seconds
         if ($_SESSION['prevPage']) {

@@ -3,24 +3,12 @@ require_once "./includes/EmailData.php";
 require_once './includes/utils.php';
 session_start();
 $displayBlock = '';
-if (!$_SESSION['auth']) {
-//redirect back to login form if not authorized
-    $_SESSION['prevPage'] = htmlspecialchars($_SERVER["PHP_SELF"]);
-    header("Location: login.php");
-    exit;
-}
-if ($_SESSION['last_activity'] < time() - $_SESSION['expire_time']) { //have we expired?
-//redirect to logout.php
-    $_SESSION['destroy'] = FALSE;
-    $_SESSION['prevPage'] = htmlspecialchars($_SERVER["PHP_SELF"]);
-    header('Location: logout.php');
-} else { //if we haven't expired:
-    $_SESSION['destroy'] = TRUE; // Since we want to destroy the session if clicking logout
-    $_SESSION['last_activity'] = time(); //this was the moment of last activity.
-}
+isAuthenticated();
+isActiveCheck();
 if ($_SESSION['emailDB']) {
     $mysqli = $_SESSION['emailDB'];
     $mysqli->connect();
+
 //    var_dump($_POST);
     if (filter_input(INPUT_POST, 'sortType')) {
         $sortType = test_input(filter_input(INPUT_POST, 'sortType'));
@@ -131,7 +119,7 @@ and open the template in the editor.
                 <h1><span>Email Accounts</span></h1>
                 <div class="clear">
                     <form class="clear" id="Accounts" method="post" 
-                          action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                          action="<?php echoPagePath(); ?>">
                         <input id="sortType" type="hidden" name="sortType" value="" />
                         <input id="deleteUsername" type="hidden" name="deleteUsername" value="" />
                         <input id="deleteDomain" type="hidden" name="deleteDomain" value="" />
@@ -143,12 +131,10 @@ and open the template in the editor.
                         </table></form>
                     <div class="flex">
                         <form class="column" id="accountcreation" method="post" 
-                              action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                              action="<?php echoPagePath(); ?>">
                             <fieldset>
                                 <legend> Account Creation </legend>
                                 <label for="user">Email:</label>
-
-
                                 <input name ="user" type="text" required="" autocomplete="off" /> @ 
                                 <select name="domain" required="">
                                     <?php
@@ -165,12 +151,10 @@ and open the template in the editor.
                     </div>
                     <div class="flex">
                         <form class="column" id="resetPass" method="post" 
-                              action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
+                              action="<?php echoPagePath(); ?>">
                             <fieldset>
                                 <legend> Password Reset </legend>
                                 <label for="userR">User:</label>
-
-
                                 <select id="userR" name="userR" required="">
                                     <?php
                                     echo $myAccounts;
@@ -188,6 +172,7 @@ and open the template in the editor.
             </div>
             <footer>
                 <p>&copy; Copyright  by Chris Fedun</p>
+
             </footer>
         </main>
         <script src="js/require.js"></script>
