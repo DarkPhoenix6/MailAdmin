@@ -2,29 +2,18 @@
 require_once "./includes/EmailData.php";
 require_once './includes/utils.php';
 session_start();
-if (!$_SESSION['auth']) {
-    //redirect back to login form if not authorized
-    $_SESSION['prevPage'] = htmlspecialchars($_SERVER["PHP_SELF"]);
-    header("Location: login.php");
-    exit;
-}
-if ($_SESSION['last_activity'] < time() - $_SESSION['expire_time']) { //have we expired?
-    // we don't want to destroy this session.... Yet...
-    $_SESSION['destroy'] = FALSE;
-    // Set to return to this page
-    $_SESSION['prevPage'] = htmlspecialchars($_SERVER["PHP_SELF"]);
-    //redirect to logout.php
-    header('Location: logout.php');
-} else { //if we haven't expired:
-    $_SESSION['destroy'] = TRUE; // Since we want to destroy the session if clicking logout
-    $_SESSION['last_activity'] = time(); //this was the moment of last activity.
-}
+isAuthenticated();
+isActiveCheck();
 if ($_SESSION['emailDB']) {
     $mysqli = $_SESSION['emailDB'];
     $mysqli->connect();
     if (filter_input(INPUT_POST, 'sortType')) {
         $sortType = test_input(filter_input(INPUT_POST, 'sortType'));
         $mysqli->setSort($sortType);
+    }elseif (filter_input(INPUT_POST, 'createAlias')) {
+        
+    }elseif (filter_input(INPUT_POST, 'createRedirect')) {
+        
     }
 //    var_dump($mysqli, $_POST);
 } else {

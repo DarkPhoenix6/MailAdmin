@@ -43,6 +43,7 @@ class EmailQueries {
 
     static function getUsersWithAliasCount() {
         $order = "ORDER BY `SourceDomain`ASC, `SourceUser` ASC, `destCount` ASC";
+        $order2 = "ORDER BY SourceUser ASC , SourceDomain ASC";
         return "SELECT * FROM "
                 . "( SELECT SUBSTR(email, 1, INSTR(email, '@') - 1) AS SourceUser, "
                 . "SUBSTR(email, INSTR(email, '@') + 1) AS SourceDomain, email "

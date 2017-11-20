@@ -10,7 +10,7 @@ if ((filter_input(INPUT_POST, 'username')) && (filter_input(INPUT_POST, 'passwor
     $_SESSION['auth'] = $authcheck->checkPassword($username, $pass);
     if ($_SESSION['auth']) {
         $_SESSION['username'] = $username;
-   
+
         $_SESSION['last_activity'] = time(); //your last activity was now, having logged in.
         $_SESSION['expire_time'] = 0.25 * 60 * 60; // 15 minutes in seconds
         if ($_SESSION['prevPage']) {
@@ -39,17 +39,16 @@ and open the template in the editor.
     <body>
         <main>
             <?php
-            // put your code here
             echo $displayBlock;
             ?>
             <h1>Super Secret Page!</h1>
             <form id="login" name="login" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                 <fieldset> <legend> Login Form </legend>
-                    <p><strong>username:</strong><br/>
-                        <input type='text' id="username" name='username'/></p>
-                    <p><strong>password:</strong><br/>
-                        <input type='password' id="password" name='password'/></p>
-                    <p><input type='submit' name='submit' value='login'/></p>
+                    <label for="username">username:</label><br/>
+                    <input type='text' id="username" name='username'/><br/>
+                    <label for="password">password:</label><br/>
+                    <input type='password' id="password" name='password'/><br/>
+                    <input type='submit' name='submit' value='login'/><br/>
                 </fieldset>
             </form>
         </main>
