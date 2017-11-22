@@ -174,9 +174,10 @@ class EmailData {
             }
 
             $Error = $this->_database->verifyTransactions();
-        } else {
-            
+
         }
+            return $isError;
+
     }
 
     public function getEmailOverview() {
@@ -189,7 +190,7 @@ class EmailData {
     public function displayEmailOverview() {
         $isError = FALSE;
         $numRows = 0;
-        $queryArray;
+        $queryArray = '';
         $myTable = ''
                 . '<thead><tr><th colspan="2">Email Address</th><th></th>'
                 . '<th colspan="2">Alias Account</th></tr>'

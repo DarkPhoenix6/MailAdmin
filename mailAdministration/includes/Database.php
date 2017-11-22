@@ -14,8 +14,8 @@
 class Database {
 
     //put your code here
-    protected $_sPort = "";
-    protected $_sHost = "";
+    protected $_Port = "";
+    protected $_Host = "";
     protected $_DataBase = "";
     protected $_User = "";
     protected $_Pass = "";
@@ -30,8 +30,8 @@ class Database {
 
     // Constructor
     function __construct($Host, $User, $Pass, $DataBase, $Port) {
-        $this->_sHost = $Host;
-        $this->_sPort = $Port;
+        $this->_Host = $Host;
+        $this->_Port = $Port;
         $this->_DataBase = $DataBase;
         $this->_User = $User;
         $this->_Pass = $Pass;
@@ -217,12 +217,12 @@ class Database {
      */
     protected function _connect() {
         $isError = FALSE;
-        if ($this->_isNotEmpty($this->_sPort)) {
-            if (FALSE === ($this->_mysqli = mysqli_connect($this->_sHost, $this->_User, $this->_Pass, $this->_DataBase, $this->_sPort))) {
+        if ($this->_isNotEmpty($this->_Port)) {
+            if (FALSE === ($this->_mysqli = mysqli_connect($this->_Host, $this->_User, $this->_Pass, $this->_DataBase, $this->_Port))) {
                 $isError = TRUE;
             }
         } else {
-            if (FALSE === ($this->_mysqli = mysqli_connect($this->_sHost, $this->_User, $this->_Pass, $this->_DataBase))) {
+            if (FALSE === ($this->_mysqli = mysqli_connect($this->_Host, $this->_User, $this->_Pass, $this->_DataBase))) {
                 $isError = TRUE;
 
                 echo mysqli_connect_error();

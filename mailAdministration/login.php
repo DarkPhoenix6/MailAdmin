@@ -43,7 +43,8 @@ and open the template in the editor.
             ?>
             <h1>Super Secret Page!</h1>
             <form id="login" name="login" method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                <fieldset> <legend> Login Form </legend>
+                <fieldset> 
+                    <legend> Login Form </legend>
                     <label for="username">username:</label><br/>
                     <input type='text' id="username" name='username'/><br/>
                     <label for="password">password:</label><br/>

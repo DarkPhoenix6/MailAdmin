@@ -53,8 +53,7 @@ class EmailQueries {
                 . "FROM `virtual_aliases` LEFT JOIN `virtual_users` "
                 . "ON `virtual_users`.`email` = `destination` "
                 . "GROUP BY `destination` ) AS "
-                . "`counted` ON `users`.`email` = `counted`.`destination` "
-                . $order;
+                . "`counted` ON `users`.`email` = `counted`.`destination` " . $order;
     }
 
     static function deleteUser($email) {
@@ -72,7 +71,7 @@ class EmailQueries {
     }
 
     static function createForward($srcAddress, $destAddress, $srcDomain) {
-        $s = "INSERT INTO `virtual_aliases` (`domain_id`, `source`, `destination`) VALUES ( (" . $this->getDomainID($srcDomain) . "), '" . $srcAddress . "', '" . $destAddress . "');";
+        $s = "INSERT INTO `virtual_aliases` (`domain_id`, `source`, `destination`) VALUES ( (" . self::getDomainID($srcDomain) . "), '" . $srcAddress . "', '" . $destAddress . "');";
         return $s;
     }
 
@@ -110,7 +109,7 @@ class EmailQueries {
 
     static function updatePassword($email, $realEscapePass) {
         return "UPDATE virtual_users SET password="
-                . $this->generatePassString($realEscapePass)
+                . self::generatePassString($realEscapePass)
                 . " WHERE `email`='" . $email . "';";
     }
 

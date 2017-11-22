@@ -4,6 +4,7 @@ require_once './includes/utils.php';
 session_start();
 isAuthenticated();
 isActiveCheck();
+$displayBlock = '';
 if ($_SESSION['emailDB']) {
     $mysqli = $_SESSION['emailDB'];
     $mysqli->connect();
@@ -11,7 +12,27 @@ if ($_SESSION['emailDB']) {
         $sortType = test_input(filter_input(INPUT_POST, 'sortType'));
         $mysqli->setSort($sortType);
     }elseif (filter_input(INPUT_POST, 'createAlias')) {
-        
+        if (checkUserPattern(filter_input(INPUT_POST, 'user'))){
+            $user = strict_input_Filter(filter_input(INPUT_POST, 'user'));
+            if (checkDomain(filter_input(INPUT_POST, 'domain'))){
+                $domain = strict_input_Filter(filter_input(INPUT_POST, 'domain'));
+                if (filterEmailPattern(filter_input(INPUT_POST, 'destination'))){
+                    $destination = strict_input_Filter(filter_input(INPUT_POST, 'destination'));
+                    if (FALSE == ($isError = $mysqli->createAlias($user, $domain, $destination))){
+                        $displayBlock .= "<p class='success'>Successfully created Alias!</p>";
+                    }else{
+                        $displayBlock .= "<p class='error'>Error Occured</p>";
+                    }
+                }else {
+                    $displayBlock .= "<p class='error'>Invalid destination</p>";
+                }
+            }else {
+                $displayBlock .= "<p class='error'>Invalid domain</p>";
+            }
+
+        }else {
+            $displayBlock .= "<p class='error'>Invalid username</p>";
+        }
     }elseif (filter_input(INPUT_POST, 'createRedirect')) {
         
     }
@@ -69,6 +90,7 @@ and open the template in the editor.
         </div>
         <main>
             <div class="main">
+                <?php echo "$displayBlock"; ?>
                 <div class="fieldset">
                     <h1><span>Aliases</span></h1>
                     <div class="clear">
@@ -88,7 +110,7 @@ and open the template in the editor.
                                     <label for="user">Alias:</label>
 
 
-                                    <input name ="user" type="text" required="" autocomplete="off" /> @ 
+                                    <input id="user" name ="user" type="text" required="" autocomplete="off" /> @
                                     <select name="domain" required="">
                                         <?php
                                         echo $myDomains;
@@ -117,10 +139,8 @@ and open the template in the editor.
                                 <fieldset>
                                     <legend> Redirect/Forwarding Creation </legend>
                                     <label for="userRedirect">Alias:</label>
-
-
-                                    <input name ="userRedirect" type="text" required="" autocomplete="off" /> @ 
-                                    <select name="domain" required="">
+                                    <input id="userRedirect" name ="userRedirect" type="text" required="" autocomplete="off" /> @
+                                    <select name="domainRedirect" required="">
                                         <?php
                                         echo $myDomains;
                                         ?>
