@@ -6,6 +6,7 @@
  * and open the template in the editor.
  */
 require_once 'Database.php';
+require_once 'EmailQueries.php';
 
 /**
  * Description of Auth
@@ -15,9 +16,18 @@ require_once 'Database.php';
 class Auth {
 
     //put your code here
+    /**
+     * @var Database
+     */
     protected $_database;
+    /**
+     * @var FALSE
+     */
     protected $_connected;
 
+    /**
+     * Auth constructor.
+     */
     function __construct() {
         $host = 'localhost';
         $port = '';
@@ -28,17 +38,31 @@ class Auth {
         $this->_connected = $this->_database->connect();
     }
 
+    /**
+     * @param $pass
+     * @param $salt
+     * @return string
+     */
     public function generateHashString($pass, $salt) {
         return "CONCAT('{SHA256-CRYPT}', ENCRYPT (" . $pass . ", CONCAT('$5$', " . $salt . ")))";
     }
 
     //Protected Methods
+    /**
+     * @param $passHash string
+     * @return string
+     */
     protected function getSalt($passHash) {
         $hashString = substr($passHash, 14);
         $salt = substr($hashString, 3, 16);
         return $salt;
     }
 
+    /**
+     * @param $UserName
+     * @param $pass
+     * @return bool
+     */
     public function checkPassword($UserName, $pass) {
         $sql_query = "SELECT password FROM `AdminUsers` WHERE `username` = '" . $UserName . "'";
         $isError = $this->_database->getOneQueryRow($row, $sql_query);
@@ -61,6 +85,9 @@ class Auth {
         return FALSE;
     }
 
+    /**
+     * @param $pass
+     */
     protected function createPass($pass) {
         $salt = "SUBSTRING(SHA(RAND()), -16)";
         $sqlPass = $this->generateHashString($pass, $salt);

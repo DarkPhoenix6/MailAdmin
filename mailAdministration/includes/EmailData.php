@@ -18,47 +18,74 @@ require_once 'EmailQueries.php';
 class EmailData {
 
     //put your code here
-    protected $_downTriangleSmall = "&#x25BE;"; // 	&#9662;
-    Protected $_upTriangleSmall = "&#9652;"; //	0x25B4
+    //protected $_downTriangleSmall = "&#x25BE;"; // 	&#9662;
+    //Protected $_upTriangleSmall = "&#9652;"; //	0x25B4
 
-    const EMAIL_QUERY = "SELECT"
-            . " domain_id AS idSourceDomain"
-            . ",SUBSTR(email, 1, INSTR(email, '@')-1) AS SourceUser"
-            . ",SUBSTR(email, INSTR(email, '@')+1) AS SourceDomain"
-            . ",NULL AS DestinationUser"
-            . ",NULL AS DestinationDomain"
-            . ",NULL AS idDestinationUser"
-            . " FROM `virtual_users`"
-            . " UNION SELECT"
-            . " alias.domain_id AS idDestinationDomain"
-            . ",SUBSTR(alias.source, 1, INSTR(alias.source, '@')-1) AS SourceUser"
-            . ",SUBSTR(alias.source, INSTR(alias.source, '@')+1) AS SourceDomain"
-            . ",SUBSTR(alias.destination, 1, INSTR(alias.destination, '@')-1) AS DestinationUser"
-            . ",SUBSTR(alias.destination, INSTR(alias.destination, '@')+1) AS DestinationDomain"
-            . ",user.id AS idDestinationUser"
-            . " FROM `virtual_aliases` AS alias"
-            . " LEFT JOIN `virtual_users` AS user ON(user.email=alias.destination)";
+
+    /**
+     *
+     */
     const SOURCEUSER = 'SourceUser ASC, SourceDomain ASC, DestinationUser ASC, DestinationDomain ASC';
+    /**
+     *
+     */
     const SOURCEDOMAIN = 'SourceDomain ASC, SourceUser ASC, DestinationUser ASC, DestinationDomain ASC';
+    /**
+     *
+     */
     const DESTINATIONUSER = 'DestinationUser ASC, DestinationDomain ASC, SourceUser ASC, SourceDomain ASC';
+    /**
+     *
+     */
     const DESTINATIONDOMAIN = 'DestinationDomain ASC, DestinationUser ASC, SourceUser ASC, SourceDomain ASC';
 
     //protected $_emailQueries = EmailQueries;
+    /**
+     * @var string
+     */
     private $_DD = 'DestinationDomain';
+    /**
+     * @var string
+     */
     private $_DU = 'DestinationUser';
+    /**
+     * @var string
+     */
     private $_SU = 'SourceUser';
+    /**
+     * @var string
+     */
     private $_SD = 'SourceDomain';
+    /**
+     * @var string
+     */
     protected $_sortType;
+    /**
+     * @var
+     */
     public $log;
     /**
      *
      * @var Database
      */
     protected $_database;
+    /**
+     * @var string
+     */
     protected $_emailQueryResult = '';
+    /**
+     * @var bool|FALSE
+     */
     protected $_connected = FALSE;
+    /**
+     * @var
+     */
     protected $_logpath;
     // Constructor
+
+    /**
+     * EmailData constructor.
+     */
     function __construct() {
         $host = 'localhost';
         $port = '';
@@ -72,28 +99,52 @@ class EmailData {
         $succeed = $this->getEmailOverview();
     }
 
+    /**
+     *
+     */
     function __destruct() {
         $this->_database->verifyTransactions();
     }
 
+    /**
+     *
+     */
     public function connect() {
         $this->_connected = $this->_database->connect();
     }
 
+    /**
+     * @param $result
+     * @param $query
+     * @return bool
+     */
     public function queryDB(&$result, $query) {
         return $this->_database->getQuery($result, $query);
     }
 
+    /**
+     * @param $pass
+     * @return string
+     */
     public function generatePassString($pass) {
         return "CONCAT('{SHA256-CRYPT}', ENCRYPT ('"
                 . $this->realEscape($pass)
                 . "', CONCAT('$5$', SUBSTRING(SHA(RAND()), -16))))";
     }
 
+    /**
+     * @param $escapeString
+     * @return string
+     */
     public function realEscape($escapeString) {
         return $this->_database->realEscapeString($escapeString);
     }
 
+    /**
+     * @param $email
+     * @param $pass
+     * @return bool
+     */
     public function updatePassword($email, $pass) {
         $password_query = "UPDATE virtual_users SET password="
                 . $this->generatePassString($pass)
@@ -103,6 +154,10 @@ class EmailData {
         return $isError;
     }
 
+    /**
+     * @param $domain
+     * @return mixed
+     */
     public function createDomain($domain) {
         $sql = "INSERT INTO `virtual_domains` (`id`, `name`) VALUES (NULL, '"
                 . $domain . "')";
@@ -110,12 +165,22 @@ class EmailData {
         return $isError;
     }
 
+    /**
+     * @param $domain
+     * @return mixed
+     */
     public function deleteDomain($domain) {
         $sql = "DELETE FROM `virtual_domains` WHERE `name`='" . $domain . "'";
         $this->_domainSubMethod($isError, $sql);
         return $isError;
     }
 
+    /**
+     * @param $userName
+     * @param $pass
+     * @param $domain
+     * @return bool
+     */
     public function createUser($userName, $pass, $domain) {
         $email = $userName . '@' . $domain;
         $reEmail = $this->realEscape($email);
@@ -132,6 +197,11 @@ class EmailData {
         return $isError;
     }
 
+    /**
+     * @param $isError
+     * @param $sql_VirtualUser
+     * @param $sql_VirtualAlias
+     */
     public function createUserSubMethod(&$isError, $sql_VirtualUser, $sql_VirtualAlias) {
         if (FALSE == ($this->_database->startTransaction())) {
             if (FALSE == ($isError = $this->_database->state($sql_VirtualUser))) {
@@ -146,6 +216,11 @@ class EmailData {
         $Error = $this->_database->verifyTransactions();
     }
 
+    /**
+     * @param $isError
+     * @param $sql_VirtualAlias
+     * @return bool
+     */
     public function modifyVirtualAliasSubmethod($isError, $sql_VirtualAlias) {
         if (FALSE == ($isError = $this->_database->state($sql_VirtualAlias))) {
             $Error = $this->_database->commitTransaction();
@@ -153,10 +228,21 @@ class EmailData {
         return $isError;
     }
 
+    /**
+     * @param $isError
+     * @param $sql_VirtualUser
+     * @param $sql_VirtualAlias
+     */
     public function deleteUserSubMethod(&$isError, $sql_VirtualUser, $sql_VirtualAlias) {
         $this->createUserSubMethod($isError, $sql_VirtualUser, $sql_VirtualAlias);
     }
 
+    /**
+     * @param $srcUser
+     * @param $srcDomain
+     * @param $DestEmail
+     * @return bool
+     */
     public function createAlias($srcUser, $srcDomain, $DestEmail) {
         $srcAddress = $this->realEscape($srcUser . "@" . $srcDomain);
         $destAddress = $this->realEscape($DestEmail);
@@ -180,13 +266,19 @@ class EmailData {
 
     }
 
+    /**
+     * @return bool
+     */
     public function getEmailOverview() {
         $sortType = $this->_sortType;
         $this->freeResult($this->_emailQueryResult);
-        $query = self::EMAIL_QUERY . " ORDER BY " . $sortType;
+        $query = EmailQueries::getOverview() . " ORDER BY " . $sortType;
         return $this->queryDB($this->_emailQueryResult, $query);
     }
 
+    /**
+     * @return string
+     */
     public function displayEmailOverview() {
         $isError = FALSE;
         $numRows = 0;
@@ -221,6 +313,9 @@ class EmailData {
         return $myTable;
     }
 
+    /**
+     * @return string
+     */
     public function displayAliases() {
         $isError = FALSE;
         $numRows = 0;
@@ -260,6 +355,9 @@ class EmailData {
         return $myTable;
     }
 
+    /**
+     * @return string
+     */
     public function displayAccounts() {
         $isError = FALSE;
         $numRows = 0;
@@ -297,6 +395,9 @@ class EmailData {
         return $myTable;
     }
 
+    /**
+     * @return string
+     */
     public function displayDomains() {
         $isError = FALSE;
         $numRows = 0;
@@ -321,6 +422,11 @@ class EmailData {
         return $myTable;
     }
 
+    /**
+     * @param $domain
+     * @param $id
+     * @return bool
+     */
     public function getDomainID($domain, &$id) {
         $SqlQuery = "SELECT id FROM `virtual_domains` WHERE `name`='" . $domain . "'";
         $result = array();
@@ -330,11 +436,19 @@ class EmailData {
         return $isError;
     }
 
+    /**
+     * @param $result
+     * @return bool
+     */
     Public function getDomains(&$result) {
         $domainQuery = EmailQueries::getDomains();
         return $this->queryDB($result, $domainQuery);
     }
 
+    /**
+     * @param $result
+     * @return bool
+     */
     Public function getAccounts(&$result) {
         $sortType = self::SOURCEDOMAIN;
         $this->freeResult($this->_emailQueryResult);
@@ -342,6 +456,9 @@ class EmailData {
         return $this->queryDB($result, $query);
     }
 
+    /**
+     * @return string
+     */
     public function getDomainOptions() {
         $isError = FALSE;
         $myOptions = '';
@@ -359,6 +476,9 @@ class EmailData {
         return $myOptions;
     }
 
+    /**
+     * @return string
+     */
     public function getAccountOptions() {
         $isError = FALSE;
         $myOptions = '';
@@ -376,10 +496,20 @@ class EmailData {
         return $myOptions;
     }
 
+    /**
+     * @param $result
+     */
     public function freeResult(&$result) {
         $this->_database->freeResult($result);
     }
 
+    /**
+     * @param $sourceUser
+     * @param $sourceDomain
+     * @param $destUser
+     * @param $destDomain
+     * @return bool
+     */
     public function addAlias($sourceUser, $sourceDomain, $destUser, $destDomain) {
 
         if (FALSE == ($this->_database->startTransaction())) {
@@ -393,6 +523,9 @@ class EmailData {
         return $isError;
     }
 
+    /**
+     * @param $sortString
+     */
     public function setSort($sortString) {
         if ($sortString == 'SOURCEDOMAIN') {
             $this->_sortType = self::SOURCEDOMAIN;
@@ -405,6 +538,10 @@ class EmailData {
         }
     }
 
+    /**
+     * @param $email
+     * @return bool
+     */
     public function deleteUser($email) {
         $isError = FALSE;
         $deleteAlias = "DELETE FROM `virtual_aliases` WHERE `destination` = '"
@@ -416,6 +553,11 @@ class EmailData {
     }
 
     // PROTECTED METHODS
+
+    /**
+     * @param $isError
+     * @param $query
+     */
     protected function _domainSubMethod(&$isError, $query) {
         if (FALSE == ($this->_database->startTransaction())) {
             if (FALSE == ($isError = $this->_database->state($query))) {
@@ -430,12 +572,21 @@ class EmailData {
         $Error = $this->_database->verifyTransactions();
     }
 
+    /**
+     * @param $isError
+     * @param $query
+     */
     protected function _passwordReset(&$isError, $query) {
         $this->_domainSubMethod($isError, $query);
     }
 
     // PRIVATE METHODS
 
+    /**
+     * @param $myTable
+     * @param $isError
+     * @param $queryArray
+     */
     private function _displayAccounts(&$myTable, &$isError, &$queryArray) {
         $SD_class = 'td_alignLeft';
         $UserAcctClass = 'td_alignRight';
@@ -462,6 +613,11 @@ class EmailData {
         }
     }
 
+    /**
+     * @param $myTable
+     * @param $isError
+     * @param $queryArray
+     */
     private function _displayEmail(&$myTable, &$isError, &$queryArray) {
         $SD_class = 'td_alignLeft';
         $UserAcctClass = 'td_alignRight';
@@ -495,6 +651,11 @@ class EmailData {
         }
     }
 
+    /**
+     * @param $myTable
+     * @param $isError
+     * @param $queryArray
+     */
     private function _displayAliases(&$myTable, &$isError, &$queryArray) {
         $SD_class = 'td_alignLeft';
         $UserAcctClass = 'td_alignRight';
@@ -527,12 +688,24 @@ class EmailData {
         }
     }
 
+    /**
+     * @param $myOptions
+     * @param $result
+     * @param $isError
+     * @param $queryArray
+     */
     private function _domainOptions(&$myOptions, $result, &$isError, &$queryArray) {
         while (FALSE === ($isError = $this->_database->fetchArray($result, $queryArray)) && $queryArray != NULL) {
             $myOptions .= '<option value="' . $queryArray["name"] . '">' . $queryArray['name'] . '</option>';
         }
     }
 
+    /**
+     * @param $myOptions
+     * @param $result
+     * @param $isError
+     * @param $queryArray
+     */
     private function _accountOptions(&$myOptions, $result, &$isError, &$queryArray) {
         $emailDomain = "";
         $SU = $SD = $DU = $DD = '';
@@ -555,6 +728,12 @@ class EmailData {
         $myOptions .= '</optgroup>';
     }
 
+    /**
+     * @param $myTable
+     * @param $result
+     * @param $isError
+     * @param $queryArray
+     */
     private function _displayDomains(&$myTable, $result, &$isError, &$queryArray) {
         $class = "delete";
         while (FALSE === ($isError = $this->_database->fetchArray($result, $queryArray)) && $queryArray != NULL) {
@@ -567,6 +746,13 @@ class EmailData {
         }
     }
 
+    /**
+     * @param $SU
+     * @param $SD
+     * @param $DU
+     * @param $DD
+     * @param $queryArray
+     */
     private function _setQueryResultVars(&$SU, &$SD, &$DU, &$DD, &$queryArray) {
         $DU = $queryArray[$this->_DU];
         $DD = $queryArray[$this->_DD];
