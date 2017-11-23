@@ -4,5 +4,9 @@
     "keywords": ["util", "functional", "server", "client", "browser", "email"],
     "author": "Chris Fedun",
     "contributors": [],
-    "dependencies": {"https://github.com/DarkPhoenix6/299-Scripts"}
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/DarkPhoenix6/MailAdmin.git"
+    },
+    "dependencies": {}
 }

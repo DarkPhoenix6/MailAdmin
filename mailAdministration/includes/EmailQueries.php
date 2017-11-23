@@ -42,8 +42,10 @@ class EmailQueries {
     }
 
     static function getUsersWithAliasCount() {
-        $order = "ORDER BY `SourceDomain`ASC, `SourceUser` ASC, `destCount` ASC";
-        $order2 = "ORDER BY SourceUser ASC , SourceDomain ASC";
+        $order = "`SourceDomain`ASC, `SourceUser` ASC, `destCount` ASC";
+        $order2 = "SourceUser ASC , SourceDomain ASC, `destCount` ASC";
+        $order3 = "`destCount` ASC, SourceUser ASC , SourceDomain ASC";
+        $order4 = "`destCount` ASC, `SourceDomain`ASC, `SourceUser` ASC";
         return "SELECT * FROM "
                 . "( SELECT SUBSTR(email, 1, INSTR(email, '@') - 1) AS SourceUser, "
                 . "SUBSTR(email, INSTR(email, '@') + 1) AS SourceDomain, email "
@@ -53,7 +55,7 @@ class EmailQueries {
                 . "FROM `virtual_aliases` LEFT JOIN `virtual_users` "
                 . "ON `virtual_users`.`email` = `destination` "
                 . "GROUP BY `destination` ) AS "
-                . "`counted` ON `users`.`email` = `counted`.`destination` " . $order;
+                . "`counted` ON `users`.`email` = `counted`.`destination` ORDER BY " . $order;
     }
 
     static function deleteUser($email) {
@@ -95,8 +97,13 @@ class EmailQueries {
                 . " ASC";
     }
 
+    static function checkDomainExistance($domain){
+        return "SELECT id, name FROM `virtual_domains` WHERE `name` = '" . $domain . "'";
+    }
+
     static function getDomainsWithCount() {
-        return "SELECT domain.name AS Dname, domain.id AS dId, COUNT(vUser.id) AS users_count, (SELECT COUNT(id) FROM `virtual_aliases` WHERE domain_id = domain.id) AS alias_count FROM `virtual_domains` AS domain LEFT JOIN `virtual_users` AS vUser ON (vUser.domain_id = domain.id) GROUP BY domain.id ORDER BY domain.name ASC ";
+        return "SELECT domain.name AS Dname, domain.id AS dId, COUNT(vUser.id) AS users_count, (SELECT COUNT(id) FROM "
+. "`virtual_aliases` WHERE domain_id = domain.id) AS alias_count FROM `virtual_domains` AS domain LEFT JOIN `virtual_users` AS vUser ON (vUser.domain_id = domain.id) GROUP BY domain.id ORDER BY domain.name ASC ";
     }
 
     // PASSWORDS
