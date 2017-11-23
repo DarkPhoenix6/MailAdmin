@@ -22,7 +22,7 @@ class Auth {
         $host = 'localhost';
         $port = '';
         $db = 'mailserver';
-        $user = "mailauthadmin";
+        $user = "mailadmin";
         $pass = 'letmein';
         $this->_database = new Database($host, $user, $pass, $db, $port);
         $this->_connected = $this->_database->connect();
@@ -64,6 +64,7 @@ class Auth {
     protected function createPass($pass) {
         $salt = "SUBSTRING(SHA(RAND()), -16)";
         $sqlPass = $this->generateHashString($pass, $salt);
+
     }
 
 }

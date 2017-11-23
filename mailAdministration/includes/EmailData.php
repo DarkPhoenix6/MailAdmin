@@ -190,7 +190,7 @@ class EmailData {
     public function displayEmailOverview() {
         $isError = FALSE;
         $numRows = 0;
-        $queryArray = '';
+        $queryArray = array();
         $myTable = ''
                 . '<thead><tr><th colspan="2">Email Address</th><th></th>'
                 . '<th colspan="2">Alias Account</th></tr>'
@@ -224,7 +224,7 @@ class EmailData {
     public function displayAliases() {
         $isError = FALSE;
         $numRows = 0;
-        $queryArray;
+        $queryArray = array();
         $myTable = ''
                 . '<thead><tr><th></th><th colspan="2">Email Address</th><th></th>'
                 . '<th colspan="2">Alias Account</th></tr>'
@@ -263,7 +263,7 @@ class EmailData {
     public function displayAccounts() {
         $isError = FALSE;
         $numRows = 0;
-        $queryArray;
+        $queryArray = array();
         $myTable = ''
                 . '<thead><tr><th colspan="3">Email Accounts</th>'
                 . '</tr>'
@@ -300,7 +300,7 @@ class EmailData {
     public function displayDomains() {
         $isError = FALSE;
         $numRows = 0;
-        $queryArray;
+        $queryArray = array();
         $myTable = ''
                 . '<thead><tr><th></th><th >Domains</th>'
                 . '</tr>'
@@ -323,7 +323,7 @@ class EmailData {
 
     public function getDomainID($domain, &$id) {
         $SqlQuery = "SELECT id FROM `virtual_domains` WHERE `name`='" . $domain . "'";
-        $result;
+        $result = array();
         if (FALSE == ($isError = $this->_database->getOneQueryRow($result, $SqlQuery))) {
             $id = $result['id'];
         }
@@ -346,7 +346,7 @@ class EmailData {
         $isError = FALSE;
         $myOptions = '';
         $result = FALSE;
-        $queryArray;
+        $queryArray = array();
         if (FALSE !== ($isError = $this->getDomains($result))) {
             ;
         } elseif (FALSE !== ($isError = $this->_database->getCount($result, $numRows))) {
@@ -363,7 +363,7 @@ class EmailData {
         $isError = FALSE;
         $myOptions = '';
         $result = FALSE;
-        $queryArray;
+        $queryArray = array();
         if (FALSE !== ($isError = $this->getAccounts($result))) {
             ;
         } elseif (FALSE !== ($isError = $this->_database->getCount($result, $numRows))) {
