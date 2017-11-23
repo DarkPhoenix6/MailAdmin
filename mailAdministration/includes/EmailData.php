@@ -452,7 +452,7 @@ class EmailData {
     Public function getAccounts(&$result) {
         $sortType = self::SOURCEDOMAIN;
         $this->freeResult($this->_emailQueryResult);
-        $query = self::EMAIL_QUERY . " ORDER BY " . $sortType;
+        $query = EmailQueries::getOverview() . " ORDER BY " . $sortType;
         return $this->queryDB($result, $query);
     }
 

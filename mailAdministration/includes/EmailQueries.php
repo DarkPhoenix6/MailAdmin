@@ -18,6 +18,12 @@ class EmailQueries {
     /**
      * @return string
      */
+    static function emailQuery(){
+        return self::getOverview();
+    }
+    /**
+     * @return string
+     */
     static function getOverview() {
         return "SELECT"
                 . " domain_id AS idSourceDomain"
@@ -38,6 +44,14 @@ class EmailQueries {
                 . " LEFT JOIN `virtual_users` AS user ON(user.email=alias.destination)";
     }
 
+    // ADMINS
+
+    /**
+     * @return string
+     */
+    static function getAdminUsers(){
+        return "SELECT id, email, username FROM `AdminUsers` ORDER BY username";
+    }
     // USERS
 
     /**
@@ -110,7 +124,14 @@ class EmailQueries {
         return $s;
     }
 
-
+    /**
+     * @param $source
+     * @param $destination
+     * @return string
+     */
+    static function checkAliasExistence($source, $destination){
+        return "SELECT `id`, `domain_id`, `source`, `destination` FROM `virtual_aliases` WHERE `source` = '" . $source . "' AND `destination`='" . $destination . "'";
+    }
     // Domains
 
     /**

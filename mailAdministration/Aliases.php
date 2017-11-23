@@ -36,7 +36,7 @@ if ($_SESSION['emailDB']) {
     }elseif (filter_input(INPUT_POST, 'createRedirect')) {
         
     }
-//    var_dump($mysqli, $_POST);
+    var_dump($mysqli, $_POST);
 } else {
     $mysqli = new EmailData();
     $_SESSION['emailDB'] = $mysqli;
@@ -80,7 +80,7 @@ and open the template in the editor.
                         <a href="#aliases" class="current" >Aliases</a>
                     </li>
                     <li>
-                        <a href="#adminAccounts">Admin Accounts</a>
+                        <a href="Admin.php">Admin Accounts</a>
                     </li>
                     <li>
                         <a href="logout.php" >Logout</a>

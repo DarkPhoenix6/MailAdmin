@@ -52,7 +52,7 @@ and open the template in the editor.
                         <a href="Aliases.php" >Aliases</a>
                     </li>
                     <li>
-                        <a href="#adminAccounts" onclick="setNavClasses(4);">Admin Accounts</a>
+                        <a href="Admin.php" onclick="setNavClasses(4);">Admin Accounts</a>
                     </li>
                     <li>
                         <a href="logout.php" >Logout</a>
