@@ -34,7 +34,27 @@ if ($_SESSION['emailDB']) {
             $displayBlock .= "<p class='error' >Invalid username</p>";
         }
     } elseif (filter_input(INPUT_POST, 'createRedirect')) {
+        if (checkUserPattern(filter_input(INPUT_POST, 'userRedirect'))) {
+            $user = strict_input_Filter(filter_input(INPUT_POST, 'userRedirect'));
+            if (checkDomain(filter_input(INPUT_POST, 'domainRedirect'))) {
+                $domain = strict_input_Filter(filter_input(INPUT_POST, 'domainRedirect'));
+                if (filterEmailPattern(filter_input(INPUT_POST, 'destinationRedir'))) {
+                    $destination = strict_input_Filter(filter_input(INPUT_POST, 'destinationRedir'));
+                    if (FALSE == ($isError = $mysqli->createAlias($user, $domain, $destination))) {
+                        $displayBlock .= "<p class='success' >Successfully created Alias!</p>";
+                    } else {
+                        $displayBlock .= "<p class='error' >Error Occured</p>";
+                    }
+                } else {
+                    $displayBlock .= "<p class='error' >Invalid destination</p>";
+                }
+            } else {
+                $displayBlock .= "<p class='error' >Invalid domain</p>";
+            }
 
+        } else {
+            $displayBlock .= "<p class='error' >Invalid username</p>";
+        }
     }
 //    var_dump($mysqli, $_POST);
 } else {
