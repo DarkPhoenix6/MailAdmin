@@ -79,7 +79,7 @@ and open the template in the editor.
                 </footer>
             </div>
             <script src="js/require.js"></script>
-            <script src="js/navbar.js"></script>
+            <script src="js/navbar.min.js"></script>
             <script src="js/utils.js"></script>
             <script src="js/tableScrollbarOverview.js"></script>
         </main>

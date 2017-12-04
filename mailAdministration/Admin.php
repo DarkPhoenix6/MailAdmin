@@ -34,7 +34,6 @@ $_SESSION['emailDB'] = $mysqli;
             <li>
                 <a href="AdminPage.php" >Home</a>
             </li>
-
             <li>
                 <a href="Account.php" >Accounts</a>
             </li>
@@ -64,7 +63,13 @@ $_SESSION['emailDB'] = $mysqli;
                 <?php echo "$myTable"; ?>
             </table>
         </form>
+        <form method="post" action="<?php echoPagePath(); ?>">
+            <fieldset>
+            <input type="hidden" name="createAdmin" value="1">
+                <input type="submit" value="Submit">
+            </fieldset>
+        </form>
     </div>
-$END$
+
 </body>
 </html>

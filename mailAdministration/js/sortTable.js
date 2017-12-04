@@ -2,7 +2,7 @@
  * @author Chris Fedun
  * @original 'http://www.w3schools.com'
  */
-require('utils.js');
+require('utils.min.js');
 function sortTable(n, header_rows_num) {
 	header_rows_num = ( typeof header_rows_num !== 'undefined' || typeof header_rows_num !== 'null') ? header_rows_num : 1;
 	var table, rows, switching, i, x, y, shouldSwitch, dir, switchcount = 0;

@@ -66,9 +66,7 @@ function generateRandomNumber(digits) {// precision --> number precision in inte
     } else
         return "Number of digits should not exceed 20!";
 }
-function toggleClass(classToToggle, elementID) {
-    $(elementID).toggleClass(classToToggle);
-}
+
 
 function submitSortForm(option, id) {
 //    document.forms.Overview.sortType.value = option;
@@ -99,17 +97,22 @@ function onReady(fn) {
     }
 }
 
-function dump(obj) {
+function varDump(obj) {
     var out = '';
     for (var i in obj) {
         out += i + ": " + obj[i] + "\n";
     }
+    console.log(out);
+    //
+    // alert(out);
+    //
+    // // or, if you wanted to avoid alerts...
+    //
+    // var pre = document.createElement('pre');
+    // pre.innerHTML = out;
+    // document.body.appendChild(pre);
+}
 
-    alert(out);
-
-    // or, if you wanted to avoid alerts...
-
-    var pre = document.createElement('pre');
-    pre.innerHTML = out;
-    document.body.appendChild(pre);
+function toggleClass(classToToggle, elementID) {
+    $(elementID).toggleClass(classToToggle);
 }
