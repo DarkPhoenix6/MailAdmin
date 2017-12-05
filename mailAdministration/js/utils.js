@@ -84,6 +84,12 @@ function submitDomainDelete(domain, formID) {
     getByID(formID).submit();
 }
 
+function submitAliasDelete(sUser, sDomain, dUser, dDomain, formID){
+    getByID('deleteAliasS').value = sUser + '@' + sDomain;
+    getByID('deleteAliasD').value = dUser + '@' + dDomain;
+    getByID(formID).submit();
+}
+
 function onReady(fn) {
     if (document.readyState != 'loading') {
         fn();

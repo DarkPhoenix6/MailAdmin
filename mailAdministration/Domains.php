@@ -118,6 +118,6 @@ and open the template in the editor.
         <script src="js/navbar.min.js"></script>
         <script src="js/utils.min.js"></script>
         <script src="js/sortTable.min.js"></script>
-        <script src="js/tableScrollbar.js"></script>
+        <script src="js/tableScrollbar.min.js"></script>
     </body>
 </html>

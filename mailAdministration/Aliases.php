@@ -114,7 +114,8 @@ and open the template in the editor.
                 <form id="Aliases" class="current" name="Aliases" method="post"
                       action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
                     <input id="sortType" type="hidden" name="sortType" value=""/>
-
+                    <input id="deleteAliasS" type="hidden" name="deleteAliasS" value="" />
+                    <input id="deleteAliasD" type="hidden" name="deleteAliasD" value="" />
                     <table class="scroll">
                         <?php echo "$myTable"; ?>
                     </table>
@@ -186,7 +187,7 @@ and open the template in the editor.
     <script src="js/require.min.js"></script>
     <script src="js/navbar.min.js"></script>
     <script src="js/utils.min.js"></script>
-    <script src="js/tableScrollbarOverview.js"></script>
+    <script src="js/tableScrollbarOverview.min.js"></script>
 </main>
 </body>
 </html>
