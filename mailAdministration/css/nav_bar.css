@@ -15,7 +15,8 @@
 }
 #navbar ul li {
     /*width: 33.333%;*/
-    width: 16.666%;
+    /*width: 16.666%;*/
+    width: 20%;
     float: left;
 }
 #navbar ul li a {

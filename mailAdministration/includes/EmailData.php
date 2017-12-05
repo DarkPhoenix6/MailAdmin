@@ -403,7 +403,7 @@ class EmailData {
         $numRows = 0;
         $queryArray = array();
         $myTable = ''
-                . '<thead><tr><th></th><th >Domains</th>'
+                . '<thead><tr><th></th><th onclick="sortTable(1, 1)">Domains</th>'
                 . '</tr>'
                 . '</thead><tbody>';
 

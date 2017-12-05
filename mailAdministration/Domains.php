@@ -74,9 +74,6 @@ and open the template in the editor.
                         <a href="Aliases.php" >Aliases</a>
                     </li>
                     <li>
-                        <a href="Admin.php">Admin Accounts</a>
-                    </li>
-                    <li>
                         <a href="logout.php" >Logout</a>
                     </li>
                 </ul>

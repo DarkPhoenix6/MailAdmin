@@ -41,7 +41,7 @@ if ($_SESSION['emailDB']) {
                 if (filterEmailPattern(filter_input(INPUT_POST, 'destinationRedir'))) {
                     $destination = strict_input_Filter(filter_input(INPUT_POST, 'destinationRedir'));
                     if (FALSE == ($isError = $mysqli->createAlias($user, $domain, $destination))) {
-                        $displayBlock .= "<p class='success' >Successfully created Alias!</p>";
+                        $displayBlock .= "<p class='success' >Successfully created Redirect!</p>";
                     } else {
                         $displayBlock .= "<p class='error' >Error Occured</p>";
                     }
@@ -98,9 +98,6 @@ and open the template in the editor.
             </li>
             <li>
                 <a href="#aliases" class="current">Aliases</a>
-            </li>
-            <li>
-                <a href="Admin.php">Admin Accounts</a>
             </li>
             <li>
                 <a href="logout.php">Logout</a>
@@ -170,7 +167,7 @@ and open the template in the editor.
 
 
                             <!--<input name ="userDesr" type="text" required="" autocomplete="off" /> @-->
-                            <input type="email" id="destinationRedir" name="destination" required=""
+                            <input type="email" id="destinationRedir" name="destinationRedir" required=""
                                    autocomplete="off"/>
 
                             <input type="hidden" name="createRedirect" id="createRedirect" value="1"/>
