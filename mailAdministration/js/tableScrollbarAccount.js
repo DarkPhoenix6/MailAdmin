@@ -8,7 +8,7 @@
 
 
 // Change the selector if needed
-ready(function () {
+function tableScrollbarAccount() {
     var $table = $('table.scroll'),
             $bodyCells = $table.find('tbody tr:first').children(),
             colWidth;
@@ -25,4 +25,6 @@ ready(function () {
             $(v).width(colWidth[i]);
         });
     }).resize(); // Trigger resize handler
-});
+}
+
+$(document).ready(tableScrollbarAccount());

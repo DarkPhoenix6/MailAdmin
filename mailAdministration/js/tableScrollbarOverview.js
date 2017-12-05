@@ -8,7 +8,7 @@
 
 
 // Change the selector if needed
-ready(function () {
+$(document).ready(function () {
     var $table = $('table.scroll'),
             $bodyCells = $table.find('tbody tr.aliasRow:first').children(),
             colWidth;

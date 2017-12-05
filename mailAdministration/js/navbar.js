@@ -1,14 +1,15 @@
 /**
  * @author Chris
- * 
+ *
  * @notes requires 'https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'
  */
 
-require('https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js');
+//require('https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js');
 //require('https://code.jquery.com/jquery-2.1.3.min.js'); 
-require('js/jquery.slicknav.min.js');
+//require('js/jquery.slicknav.min.js');
+
 /**
- * 
+ *
  * @param {Object} n
  */
 function setNavClasses(n) {
@@ -56,14 +57,13 @@ function adjust_main_padding() {
 }
 
 
-ready(function () {
-    $(window).resize(function () {
-        adjustWidth();
-        adjust_main_padding();
-    });
-    $(document).ready(function () {
-        adjustWidth();
-        adjust_main_padding();
-        $('#navbar').slicknav({prependTo: "#mobile_menu"});
-    });
+$(window).resize(function () {
+    adjustWidth();
+    adjust_main_padding();
 });
+$(document).ready(function () {
+    adjustWidth();
+    adjust_main_padding();
+    $('#navbar').slicknav({prependTo: "#mobile_menu"});
+});
+
