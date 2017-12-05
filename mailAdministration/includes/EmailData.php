@@ -468,6 +468,47 @@ class EmailData
         return $myTable;
     }
 
+
+    public function displayAliasesOverview()
+    {
+        $isError = FALSE;
+        $numRows = 0;
+        $queryArray = array();
+        $myTable = ''
+            . '<thead><tr><th colspan="2">Email Address</th><th></th>'
+            . '<th colspan="2">Alias Account</th></tr>'
+            . '<tr><th class="sort" onclick="submitSortForm(\'SOURCEUSER\', \'Aliases\')'
+            . '">User</th><th class="sort" onclick="submitSortForm(\'SOURCEDOMAIN\', '
+            . '\'Aliases\')">Domain</th><th></th><th class="sort" onclick="'
+            . 'submitSortForm(\'DESTUSER\', \'Aliases\')">User</th>'
+            . '<th class="sort" onclick="submitSortForm(\'DESTDOMAIN\', \'Aliases\')">'
+            . 'Domain</th></tr></thead><tbody>';
+        if (FALSE !== ($isError = $this->getEmailOverview())) {
+            ;
+        } elseif (FALSE !== ($isError = $this->_database->getCount($this->_emailQueryResult, $numRows))) {
+            ;
+        } elseif ($numRows == 0) {
+            $myTable .= '<tr class="" >'
+                . '<td class="" colspan="6" >No emails created yet. :)</td>'
+                . '</tr>';
+        } else {
+            $this->_displayAliasesOverview($myTable, $isError, $queryArray);
+        }
+        $myTable .= '</tbody>';
+
+//        } elseif () {
+//            ;
+//        }
+
+        if (!$isError) {
+            //echo("<table>".$myTable."</table>");
+            //var_dump($this->_emailQueryResult, $queryArray);
+        } else {
+            printf("error occured!");
+        }
+        return $myTable;
+    }
+
     /**
      * @param $myTable
      * @param $isError
@@ -506,6 +547,37 @@ class EmailData
         }
     }
 
+
+    private function _displayAliasesOverview(&$myTable, &$isError, &$queryArray)
+    {
+        $SD_class = 'td_alignLeft';
+        $UserAcctClass = 'td_alignRight';
+        $alias = 'aliasRow';
+        $class = 'delete';
+        $SU = $SD = $DU = $DD = '';
+        while (FALSE === ($isError = $this->_database->fetchArray($this->_emailQueryResult, $queryArray)) && $queryArray != NULL) {
+//                if (!$isError) {
+//                    var_dump($this->_emailQueryResult, $queryArray);
+//                }
+            $this->_setQueryResultVars($SU, $SD, $DU, $DD, $queryArray);
+            $isAccount = (NULL == $DU);
+
+
+            $currentRow = '<td class="' . $UserAcctClass . '">' . $SU . '</td>'
+                . '<td class="' . $SD_class . '">@' . $SD . '</td>';
+            if ($isAccount) {
+                ;
+            } else {
+                $myTable .= '<tr class="' . $alias . '">'
+
+                    . $currentRow
+                    . '<td >Is an Alias of:</td>'
+                    . '<td class="' . $UserAcctClass . '">' . $DU . '</td>'
+                    . '<td class="' . $SD_class . '">@' . $DD . '</td>';
+            }
+            $myTable .= '</tr>';
+        }
+    }
     /**
      * @return string
      */
@@ -531,6 +603,47 @@ class EmailData
                 . '</tr>';
         } else {
             $this->_displayAccounts($myTable, $isError, $queryArray);
+        }
+        $myTable .= '</tbody>';
+
+//        } elseif () {
+//            ;
+//        }
+
+        if (!$isError) {
+            //echo("<table>".$myTable."</table>");
+            //var_dump($this->_emailQueryResult, $queryArray);
+        } else {
+            printf("error occured!");
+        }
+        return $myTable;
+    }
+
+    /**
+     * @return string
+     */
+    public function displayAccountsOverview()
+    {
+        $isError = FALSE;
+        $numRows = 0;
+        $queryArray = array();
+        $myTable = ''
+            . '<thead><tr><th colspan="2">Email Accounts</th>'
+            . '</tr>'
+            . '<tr>'
+            . '<th class="sort" onclick="submitSortForm(\'SOURCEUSER\', \'Accounts\')">'
+            . 'User</th><th class="sort" onclick="submitSortForm(\'SOURCEDOMAIN\', '
+            . '\'Accounts\')">Domain</th></tr></thead><tbody>';
+        if (FALSE !== ($isError = $this->getEmailOverview())) {
+            ;
+        } elseif (FALSE !== ($isError = $this->_database->getCount($this->_emailQueryResult, $numRows))) {
+            ;
+        } elseif ($numRows == 0) {
+            $myTable .= '<tr class="" >'
+                . '<td class="" colspan="3">No emails created yet. :)</td>'
+                . '</tr>';
+        } else {
+            $this->_displayAccountsOverview($myTable, $isError, $queryArray);
         }
         $myTable .= '</tbody>';
 
@@ -578,7 +691,29 @@ class EmailData
             }
         }
     }
+    private function _displayAccountsOverView(&$myTable, &$isError, &$queryArray)
+    {
+        $SD_class = 'td_alignLeft';
+        $UserAcctClass = 'td_alignRight';
+        $SU = $SD = $DU = $DD = '';
+        $class = "delete";
+        while (FALSE === ($isError = $this->_database->fetchArray($this->_emailQueryResult, $queryArray)) && $queryArray != NULL) {
+//                if (!$isError) {
+//                    var_dump($this->_emailQueryResult, $queryArray);
+//                }
+            $this->_setQueryResultVars($SU, $SD, $DU, $DD, $queryArray);
+            $isAccount = (NULL == $DU);
 
+            if ($isAccount) {
+                $myTable .= '<tr>'
+                    . '<td class="' . $UserAcctClass . '">' . $SU . '</td>'
+                    . '<td class="' . $SD_class . '">@' . $SD . '</td>'
+                    . '</tr>';
+            } else {
+                ;
+            }
+        }
+    }
     /**
      * @return string
      */
