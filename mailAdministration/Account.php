@@ -71,6 +71,8 @@ $myTable = $mysqli->displayAccounts();
 $myDomains = $mysqli->getDomainOptions();
 $myAccounts = $mysqli->getAccountOptions();
 $_SESSION['emailDB'] = $mysqli;
+$displayJS = '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/jquery.slicknav.min.js" ></script>';
 ?>
 <!DOCTYPE html>
 <!--
@@ -85,9 +87,7 @@ and open the template in the editor.
         <link rel="stylesheet" href="css/accounts.css" />
         <link rel="stylesheet" href="css/mobile_menu.css" />
         <link rel="stylesheet" href="css/scrollingTable.css" />
-        <script src='https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js'></script>
-        <script src="https://code.jquery.com/jquery-2.1.3.min.js" ></script>
-        <script src="js/jquery.slicknav.min.js" ></script>
+        <?php echo $displayJS; ?>
     </head>
     <body>
         <div class="parent clear">

@@ -4,6 +4,7 @@ require_once './includes/utils.php';
 session_start();
 isAuthenticated();
 isActiveCheck();
+
 if ($_SESSION['emailDB']) {
     $mysqli = $_SESSION['emailDB'];
     $mysqli->connect();
@@ -19,6 +20,8 @@ if ($_SESSION['emailDB']) {
 }
 $myTable = $mysqli->displayEmailOverview();
 $_SESSION['emailDB'] = $mysqli;
+$displayJS = '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/jquery.slicknav.min.js" ></script>';
 ?>
 <!DOCTYPE html>
 <!--
@@ -32,6 +35,7 @@ and open the template in the editor.
         <title>Admin Page</title>
         <link rel="stylesheet" href="css/index.css" />
         <link rel="stylesheet" href="css/scrollingTable.css" />
+        <?php echo $displayJS; ?>
     </head>
     <body>
         <div class="parent clear">

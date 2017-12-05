@@ -13,6 +13,8 @@ session_start();
 list($displayBlock, $mysqli) = pageStart();
 
 $_SESSION['emailDB'] = $mysqli;
+$displayJS = '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/jquery.slicknav.min.js" ></script>';
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -25,6 +27,7 @@ $_SESSION['emailDB'] = $mysqli;
     <link rel="stylesheet" href="css/accounts.css"/>
     <link rel="stylesheet" href="css/mobile_menu.css"/>
     <link rel="stylesheet" href="css/scrollingTable.css"/>
+    <?php echo $displayJS; ?>
 </head>
 <body>
 <div class="parent clear">
