@@ -292,8 +292,8 @@ class EmailData {
         } elseif (FALSE !== ($isError = $this->_database->getCount($this->_emailQueryResult, $numRows))) {
             ;
         } elseif ($numRows == 0) {
-            $myTable .= '<tr class="" colspan="6">'
-                    . '<td class="">No emails created yet. :)</td>'
+            $myTable .= '<tr class="" >'
+                    . '<td class="" colspan="6">No emails created yet. :)</td>'
                     . '</tr>';
         } else {
             $this->_displayEmail($myTable, $isError, $queryArray);
@@ -334,8 +334,8 @@ class EmailData {
         } elseif (FALSE !== ($isError = $this->_database->getCount($this->_emailQueryResult, $numRows))) {
             ;
         } elseif ($numRows == 0) {
-            $myTable .= '<tr class="" colspan="6">'
-                    . '<td class="">No emails created yet. :)</td>'
+            $myTable .= '<tr class="" >'
+                    . '<td class="" colspan="6" >No emails created yet. :)</td>'
                     . '</tr>';
         } else {
             $this->_displayAliases($myTable, $isError, $queryArray);
@@ -374,8 +374,8 @@ class EmailData {
         } elseif (FALSE !== ($isError = $this->_database->getCount($this->_emailQueryResult, $numRows))) {
             ;
         } elseif ($numRows == 0) {
-            $myTable .= '<tr class="" colspan="3">'
-                    . '<td class="">No emails created yet. :)</td>'
+            $myTable .= '<tr class="" >'
+                    . '<td class="" colspan="3">No emails created yet. :)</td>'
                     . '</tr>';
         } else {
             $this->_displayAccounts($myTable, $isError, $queryArray);

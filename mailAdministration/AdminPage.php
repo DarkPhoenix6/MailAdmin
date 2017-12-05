@@ -64,7 +64,7 @@ and open the template in the editor.
                     <h1><span>Overview</span></h1>
                     <form id="Overview" class="current" name="Overview" method="post" 
                           action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-                        <input id="sortType"type="hidden" name="sortType" value="SOURCEUSER" />
+                        <input id="sortType" type="hidden" name="sortType" value="SOURCEUSER" />
 
                         <table class="scroll">
                             <?php echo "$myTable"; ?>
