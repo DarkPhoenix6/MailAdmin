@@ -176,7 +176,6 @@ and open the template in the editor.
 
             </footer>
         </main>
-        <script src="js/require.min.js"></script>
         <script src="js/navbar.min.js"></script>
         <script src="js/utils.min.js"></script>
         <script src="js/tableScrollbarAccount.min.js"></script>

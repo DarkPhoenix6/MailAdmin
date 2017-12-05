@@ -80,7 +80,6 @@ and open the template in the editor.
                     <p>&copy; Copyright  by Chris Fedun</p>
                 </footer>
             </div>
-            <script src="js/require.js"></script>
             <script src="js/navbar.min.js"></script>
             <script src="js/utils.min.js"></script>
             <script src="js/tableScrollbarOverview.min.js"></script>

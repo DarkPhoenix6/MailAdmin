@@ -124,6 +124,11 @@ class EmailQueries {
         return $s;
     }
 
+
+    static function deleteAlias($srcAddress, $destAddress) {
+        $s = "DELETE FROM `virtual_aliases` WHERE source='" . $srcAddress ."' and `destination`='" . $destAddress . "'";
+        return $s;
+    }
     /**
      * @param $source
      * @param $destination

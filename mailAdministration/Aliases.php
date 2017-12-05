@@ -52,9 +52,26 @@ if ($_SESSION['emailDB']) {
             } else {
                 $displayBlock .= "<p class='error' >Invalid domain</p>";
             }
-
         } else {
             $displayBlock .= "<p class='error' >Invalid username</p>";
+        }
+    } elseif (filter_input(INPUT_POST, 'deleteAliasS') && filter_input(INPUT_POST, 'deleteAliasD')){
+        if (filterEmailPattern(filter_input(INPUT_POST, 'deleteAliasS'))) {
+            $source = strict_input_Filter(filter_input(INPUT_POST, 'deleteAliasS'));
+            if (filterEmailPattern(filter_input(INPUT_POST, 'deleteAliasD'))) {
+                $dest = strict_input_Filter(filter_input(INPUT_POST, 'deleteAliasD'));
+                if (FALSE == ($isError = $mysqli->deleteAlias($source, $dest))) {
+                    $displayBlock .= "<p class='success' >Successfully deleted Alias/Redirect!</p>";
+                } else {
+                    $displayBlock .= "<p class='error' >Error Occured</p>";
+                }
+            }
+            else {
+                $displayBlock .= "<p class='error' >Error Occured</p>";
+            }
+        }
+        else {
+            $displayBlock .= "<p class='error' >Error Occured</p>";
         }
     }
 //    var_dump($mysqli, $_POST);
@@ -188,7 +205,6 @@ and open the template in the editor.
             <p>&copy; Copyright by Chris Fedun</p>
         </footer>
     </div>
-    <script src="js/require.min.js"></script>
     <script src="js/navbar.min.js"></script>
     <script src="js/utils.min.js"></script>
     <script src="js/tableScrollbarOverview.min.js"></script>
