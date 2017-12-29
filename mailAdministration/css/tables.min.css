@@ -1,0 +1,1 @@
+@import 'all.css';table{border:1px solid black;border-collapse:collapse;margin-left:4px;margin-top:1em}thead{background-color:maroon;color:#fff}th,td{border:1px solid black;padding:.5em 1em}tr,th,td,tbody,thead,tfoot,table{font-family:"Times New Roman",Times,serif}tbody tr:nth-child(even){background-color:#ccc}
